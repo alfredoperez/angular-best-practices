@@ -15,10 +15,11 @@ rules/                    # Rule files organized by category
   ui/                     # Accessibility, theming
   _template.md            # Template for new rules
   _sections.md            # Category definitions
-skills/                   # Optional library skill outputs (generated)
-  angular-best-practices-ngrx/
-  angular-best-practices-signalstore/
-  angular-best-practices-tanstack/
+skills/                   # All skills (generated AGENTS.md + SKILL.md)
+  angular-best-practices/           # Core skill (84 rules)
+  angular-best-practices-ngrx/      # NgRx rules (5 rules)
+  angular-best-practices-signalstore/ # SignalStore rules (4 rules)
+  angular-best-practices-tanstack/  # TanStack Query rules (4 rules)
 packages/                 # Build tooling
   angular-best-practices-build/
 ```
@@ -59,7 +60,7 @@ Library-specific rules (NgRx, SignalStore, TanStack Query) are split into separa
 **Config:** `packages/angular-best-practices-build/src/config.ts` — `OPTIONAL_SKILLS` array defines which sections become separate skills.
 
 **Build:** `npm run build` generates:
-- `AGENTS.md` — core rules (everything except optional sections)
+- `skills/angular-best-practices/AGENTS.md` — core rules (everything except optional sections)
 - `skills/<name>/AGENTS.md` — one per optional skill
 
 **Adding a new optional skill:**

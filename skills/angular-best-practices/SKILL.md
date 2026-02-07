@@ -48,9 +48,9 @@ Install library-specific rules alongside this core skill:
 
 | Library | Install Command |
 |---------|----------------|
-| NgRx | `npx skills add alfredoperez/angular-best-practices --skill angular-best-practices-ngrx` |
-| SignalStore | `npx skills add alfredoperez/angular-best-practices --skill angular-best-practices-signalstore` |
-| TanStack Query | `npx skills add alfredoperez/angular-best-practices --skill angular-best-practices-tanstack` |
+| NgRx | `npx skills add alfredoperez/angular-best-practices/skills/angular-best-practices-ngrx` |
+| SignalStore | `npx skills add alfredoperez/angular-best-practices/skills/angular-best-practices-signalstore` |
+| TanStack Query | `npx skills add alfredoperez/angular-best-practices/skills/angular-best-practices-tanstack` |
 
 ## Quick Reference
 

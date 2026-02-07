@@ -5,7 +5,7 @@
  */
 
 import { readFileSync, writeFileSync, readdirSync, statSync, existsSync, mkdirSync } from 'fs'
-import { join, basename } from 'path'
+import { join, basename, dirname } from 'path'
 import { SKILL_CONFIG, SECTION_TITLES, SECTION_IMPACTS, OPTIONAL_SKILLS, ROOT_DIR } from './config.js'
 import { parseRuleFile } from './parser.js'
 import { validateRule, formatValidationErrors, ValidationError, DEFAULT_CONFIG } from './validator.js'
@@ -315,6 +315,7 @@ function buildSkill(): void {
   }
 
   const coreMarkdown = generateMarkdown(coreDoc)
+  mkdirSync(dirname(config.outputFile), { recursive: true })
   writeFileSync(config.outputFile, coreMarkdown)
 
   const coreTotalRules = coreSections.reduce((sum, s) => sum + s.rules.length, 0)

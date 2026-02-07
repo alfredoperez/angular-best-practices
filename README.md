@@ -7,7 +7,7 @@ Concise, actionable Angular best practices optimized for AI agents and LLMs.
 Install into your AI coding agent:
 
 ```bash
-npx add-skill alfredoperez/angular-best-practices
+npx skills add alfredoperez/angular-best-practices
 ```
 
 Supports: Claude Code, Cursor, Codex, OpenCode, VS Code Copilot, and 30+ more agents.

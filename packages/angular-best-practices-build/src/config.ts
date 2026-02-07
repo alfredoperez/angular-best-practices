@@ -29,7 +29,7 @@ export const SKILL_CONFIG: SkillConfig = {
   description: 'Angular applications and libraries',
   rulesDir: join(ROOT_DIR, 'rules'),
   metadataFile: join(ROOT_DIR, 'metadata.json'),
-  outputFile: join(ROOT_DIR, 'AGENTS.md'),
+  outputFile: join(ROOT_DIR, 'skills', 'angular-best-practices', 'AGENTS.md'),
   sectionsFile: join(ROOT_DIR, 'rules/_sections.md'),
   sectionMap: {
     // Performance - Eliminating Waterfalls
