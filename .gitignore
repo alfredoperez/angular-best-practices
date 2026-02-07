@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Local Claude files (personal settings)
+.claude/settings.local.json

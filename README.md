@@ -1,143 +1,299 @@
 # Angular Best Practices
 
-> AI-powered coding rules for Angular 17+ development.
-
-[![npm version](https://badge.fury.io/js/angular-best-practices.svg)](https://www.npmjs.com/package/angular-best-practices)
+Concise, actionable Angular best practices optimized for AI agents and LLMs.
 
 ## Installation
 
+Install into your AI coding agent:
+
 ```bash
-npx add-skill angular-best-practices
+npx add-skill alfredoperez/angular-best-practices
 ```
 
-## What's Included
+Supports: Claude Code, Cursor, Codex, OpenCode, VS Code Copilot, and 30+ more agents.
 
-**66 rules** across these categories:
+### Manual Installation
 
-| Category | Count | Description |
-|----------|-------|-------------|
-| TypeScript | 14 | Type safety, patterns, conventions |
-| Optimization | 10 | Async, data structures, caching |
-| Bundle | 5 | Code splitting, imports, @defer |
-| State Management | 4 | Signals, SignalStore, TanStack, NgRx |
-| Components | 3 | Patterns, mappers, architecture |
-| Data & UI | 7 | Forms, HTTP, dialogs, loading |
-| Testing | 7 | Unit, component, E2E, mocking |
-| Infrastructure | 6 | Routing, security, a11y, performance |
-| Architecture | 2 | Project structure, GraphQL |
+Or copy `AGENTS.md` directly to your project:
 
-## Quick Start
+| Agent | Location |
+|-------|----------|
+| Claude Code | `.claude/AGENTS.md` |
+| Cursor | `.cursor/rules/angular.md` |
+| VS Code Copilot | `.github/copilot-instructions.md` |
 
-After installation, your AI assistant will automatically apply these rules when:
+## Purpose
 
-- Creating new components
-- Writing services
-- Setting up state management
-- Writing tests
-- Reviewing code
+This repository provides **100 curated rules** for building performant, maintainable Angular applications. Each rule is designed to be:
 
-### Example: Component Creation
+- **Concise**: Under 50 lines with 1-3 line code examples
+- **Actionable**: Clear "incorrect" vs "correct" patterns
+- **AI-optimized**: Efficient token usage for LLM context windows
+
+## How It Works
 
 ```
-You: Create a user profile component
-
-AI applies:
-- Standalone component (RULES.md)
-- Signal inputs: input<User>() (RULES.md)
-- Computed for derived state (signals.md)
-- OnPush change detection (RULES.md)
-- Container/Presentation pattern if needed (components.md)
+┌─────────────────────────────────────────────────────────────────┐
+│                         rules/                                  │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐        │
+│  │ angular/ │  │  core/   │  │optimize/ │  │   ts/    │  ...   │
+│  │ 44 rules │  │ 10 rules │  │ 18 rules │  │ 14 rules │        │
+│  └────┬─────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘        │
+│       │             │             │             │               │
+│       └─────────────┴─────────────┴─────────────┘               │
+│                             │                                   │
+│                             ▼                                   │
+│                    ┌─────────────────┐                          │
+│                    │   build.ts      │                          │
+│                    │ (TypeScript)    │                          │
+│                    └────────┬────────┘                          │
+│                             │                                   │
+│                             ▼                                   │
+│                    ┌─────────────────┐                          │
+│                    │   AGENTS.md     │                          │
+│                    │  (~4,500 lines) │                          │
+│                    │  (~12k tokens)  │                          │
+│                    └─────────────────┘                          │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-## Rule Format (Strict)
+AI agents load `AGENTS.md` to get all best practices in a single, structured document with:
+- Numbered sections and subsections (1.1, 1.2, etc.)
+- Table of contents with anchors
+- Impact levels (CRITICAL, HIGH, MEDIUM, LOW)
+- Code examples for each rule
 
-All rules must be **atomic** and follows this strict format to minimize context usage:
+## Rule Categories
+
+| # | Category | Prefix | Rules | Impact |
+|---|----------|--------|-------|--------|
+| 1 | Eliminating Waterfalls | `async-`, `opt-async-` | 2 | CRITICAL |
+| 2 | Bundle Optimization | `bundle-` | 5 | CRITICAL |
+| 3 | JavaScript Performance | `opt-` | 11 | HIGH |
+| 4 | TypeScript Best Practices | `ts-` | 14 | MEDIUM |
+| 5 | Signals & Reactivity | `signal-` | 5 | HIGH |
+| 6 | Component Patterns | `component-` | 4 | HIGH |
+| 7 | RxJS Patterns | `rxjs-` | 5 | HIGH |
+| 8 | Change Detection | `cd-` | 5 | HIGH |
+| 9 | Template Optimization | `template-` | 1 | HIGH |
+| 10 | SSR & Hydration | `ssr-` | 4 | HIGH |
+| 11 | Forms | `form-` | 4 | MEDIUM |
+| 12 | NgRx State Management | `ngrx-` | 5 | HIGH |
+| 13 | SignalStore | `signalstore-` | 4 | HIGH |
+| 14 | TanStack Query | `tanstack-` | 4 | HIGH |
+| 15 | Architecture | `arch-` | 3 | HIGH |
+| 16 | Testing | `test-` | 6 | HIGH |
+| 17 | Infrastructure | `core/` | 10 | MEDIUM |
+| 18 | UI & Accessibility | `ui/`, `a11y-` | 4 | MEDIUM |
+| 19 | Data Handling | `http-`, `mapper-` | 4 | MEDIUM |
+
+## Folder Structure
+
+```
+angular-best-practices/
+├── AGENTS.md                    # Generated output for AI agents
+├── rules/
+│   ├── _sections.md             # Category definitions & ordering
+│   ├── _template.md             # Template for new rules
+│   ├── angular/                 # Angular-specific rules (44)
+│   │   ├── signal-*.md          # Signals & reactivity
+│   │   ├── component-*.md       # Component patterns
+│   │   ├── rxjs-*.md            # RxJS patterns
+│   │   ├── cd-*.md              # Change detection
+│   │   ├── ngrx-*.md            # NgRx state
+│   │   ├── signalstore-*.md     # SignalStore
+│   │   ├── tanstack-*.md        # TanStack Query
+│   │   ├── form-*.md            # Forms
+│   │   ├── ssr-*.md             # Server-side rendering
+│   │   ├── arch-*.md            # Architecture
+│   │   └── template-*.md        # Template patterns
+│   ├── core/                    # Infrastructure (10)
+│   │   ├── routing-*.md         # Routing patterns
+│   │   ├── pattern-*.md         # Design patterns
+│   │   ├── error-handling.md
+│   │   ├── security.md
+│   │   └── observability.md
+│   ├── optimization/            # Performance (18)
+│   │   ├── bundle-*.md          # Bundle optimization
+│   │   └── opt-*.md             # Runtime optimization
+│   ├── typescript/              # TypeScript (14)
+│   │   └── ts-*.md
+│   ├── testing/                 # Testing (6)
+│   │   └── test-*.md
+│   ├── ui/                      # UI & Accessibility (4)
+│   │   ├── a11y.md
+│   │   ├── dialogs.md
+│   │   ├── loading.md
+│   │   └── theming.md
+│   └── data/                    # Data handling (4)
+│       ├── http.md
+│       └── mapper-*.md
+├── packages/
+│   └── angular-best-practices-build/
+│       └── src/
+│           ├── build.ts         # Generates AGENTS.md
+│           ├── parser.ts        # Parses rule files
+│           ├── config.ts        # Section mapping
+│           └── types.ts         # TypeScript interfaces
+└── metadata.json                # Version, org, abstract
+```
+
+## Rule File Format
+
+Each rule file follows this structure:
 
 ```markdown
 ---
 title: Rule Title
-impact: HIGH|MEDIUM|LOW
-impactDescription: Brief impact description (e.g., "Prevents memory leaks")
-tags: tag1, tag2
+impact: HIGH
+impactDescription: Brief impact description
+tags: tag1, tag2, tag3
 ---
 
 ## Rule Title
 
-Context/Explanation (1-2 sentences).
+One sentence description of the rule.
 
 **Incorrect:**
-```typescript
-// Bad code example
-```
+
+\`\`\`typescript
+// 1-3 lines showing the anti-pattern
+\`\`\`
 
 **Correct:**
-```typescript
-// Good code example
-```
-```
 
-## AGENTS.md Format
-
-The `AGENTS.md` file is the compilation of all rules, designed to be consumed by AI agents. It follows this structure:
-
-1.  **Metadata Header**: Timestamp and generation info.
-2.  **Table of Contents**: Auto-generated links to all sections.
-3.  **Concatenated Rules**: All rule files merged together, organized by category.
-
-**Constraint**: `AGENTS.md` must be kept under **5000 lines** to preserve context window space. Tutorial-style content is excluded in favor of concise, atomic rules.
-
-## Files
-
-```
-angular-best-practices/
-├── SKILL.md          # User instructions & prompt
-├── AGENTS.md         # Compiled Knowledge Base (Rules)
-├── rules/            # Source definition files
-│   ├── ts-*.md       # TypeScript rules
-│   ├── opt-*.md      # Optimization rules
-│   ├── core/         # Angular Core rules
-│   └── ...           # Other categories
+\`\`\`typescript
+// 1-3 lines showing the correct pattern
+\`\`\`
 ```
 
-## Customization
+**Constraints:**
+- Description: 1 sentence max
+- Code examples: 3 lines max each
+- Code blocks: 2 max (incorrect + correct)
+- Total file length: Under 50 lines
 
-Add team-specific rules in `custom/`:
+## Usage
+
+### For AI Agents
+
+Point your AI agent to `AGENTS.md`:
 
 ```
-custom/
-├── our-naming.md
-├── our-api-patterns.md
-└── patterns/
-    └── data-table.md
+# In your agent's context
+Read: https://raw.githubusercontent.com/.../AGENTS.md
 ```
 
-These persist through updates.
+Or include in your project's `.claude/` or similar config.
 
-## AI Tool Support
-
-| Tool | Output Location |
-|------|-----------------|
-| Claude Code | `.claude/rules/*.md` |
-| Cursor | `.cursorrules` |
-| GitHub Copilot | `.github/copilot-instructions.md` |
-| Windsurf | `.windsurfrules` |
-
-## Maintenance
-
-To update the compiled rules:
+### Building AGENTS.md
 
 ```bash
-# Rebuild AGENTS.md
+npm install
 npm run build
 ```
 
+This parses all rule files and generates a structured `AGENTS.md`.
+
+## Creating New Rules
+
+1. Copy `rules/_template.md` to appropriate folder
+2. Use correct prefix for the category (e.g., `signal-` for signals)
+3. Keep code examples to 1-3 lines
+4. Run `npm run build` to regenerate AGENTS.md
+
+## Design Philosophy
+
+### Why Concise Rules?
+
+AI agents have limited context windows. Verbose documentation wastes tokens. Each rule is optimized for:
+
+- **Quick comprehension**: One glance to understand
+- **Copy-paste ready**: Code examples work as-is
+- **Impact clarity**: Know the priority immediately
+
+### Why Granular Files?
+
+- **Focused changes**: Edit one rule without touching others
+- **Easy discovery**: Find rules by prefix (`signal-*`, `rxjs-*`)
+- **Selective loading**: Future support for loading only needed categories
+
+### Why Not Guides?
+
+Long-form tutorials are better served by official Angular docs. This repo focuses on **actionable rules** that AI agents can apply immediately.
+
+## Customization
+
+### Excluding Library-Specific Rules
+
+Not using NgRx, SignalStore, or TanStack Query? Fork and build a custom AGENTS.md:
+
+```bash
+# Clone your fork
+git clone https://github.com/YOUR_USERNAME/angular-best-practices
+cd angular-best-practices
+
+# Install dependencies
+npm install
+
+# Build without NgRx rules
+npm run build -- --exclude ngrx
+
+# Build without multiple libraries
+npm run build -- --exclude ngrx,signalstore,tanstack
+```
+
+### Library Tags
+
+| Tag | Rules | Exclude If... |
+|-----|-------|---------------|
+| `ngrx` | 5 | Not using NgRx for state |
+| `signalstore` | 4 | Not using SignalStore |
+| `tanstack` | 4 | Not using TanStack Query |
+
+### Beta Rules (Excluded by Default)
+
+Some rules are experimental and excluded from the default build:
+
+| Tag | Rules | Description |
+|-----|-------|-------------|
+| `patterns` | 3 | Design patterns (Facade, Repository, Strategy) |
+
+These rules are still being refined. To include them:
+
+```bash
+# Include all rules (no exclusions)
+npm run build -- --include-all
+
+# Or explicitly exclude only what you don't want
+npm run build -- --exclude ngrx
+```
+
+### Validation
+
+The build process validates all rules against formatting standards:
+- Max 50 lines per rule file
+- Max 2 code blocks
+- Max 10 lines per code block
+- Required frontmatter: title, impact, tags
+
+To skip validation during development:
+
+```bash
+npm run build:skip-validation
+```
+
+## Inspired By
+
+- [Vercel's react-best-practices](https://github.com/vercel-labs/agent-skills) - 62 rules, all concise
+- [Agent Skills specification](https://agentskills.io/)
+
 ## Contributing
 
-1. Fork the repo
-2. Add/modify rules in `rules/`
-3. Run `npm run build` (or `./generate-agents.sh`)
-4. Submit PR
-
+1. Check existing rules to avoid duplicates
+2. Follow the template format exactly
+3. Keep examples minimal and focused
+4. Run the build to verify formatting
 
 ## License
 

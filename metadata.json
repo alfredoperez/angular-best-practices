@@ -1,0 +1,5 @@
+{
+  "version": "1.0.0",
+  "organization": "Angular Best Practices",
+  "abstract": "Comprehensive guidelines for building performant, maintainable Angular applications. These rules cover performance optimization, bundle size reduction, reactive patterns with Signals and RxJS, state management, component architecture, server-side rendering, change detection strategies, testing patterns, and TypeScript best practices. Each rule includes impact assessment and actionable code examples."
+}

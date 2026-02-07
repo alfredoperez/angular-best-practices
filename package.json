@@ -1,0 +1,32 @@
+{
+  "name": "angular-best-practices",
+  "version": "1.0.0",
+  "description": "Angular Best Practices for AI Agents",
+  "scripts": {
+    "build": "npm run build:agents",
+    "build:agents": "tsx packages/angular-best-practices-build/src/build.ts",
+    "build:upgrade": "tsx packages/angular-best-practices-build/src/build.ts --upgrade-version",
+    "build:skip-validation": "tsx packages/angular-best-practices-build/src/build.ts --skip-validation",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "SKILL.md",
+    "AGENTS.md",
+    "rules/"
+  ],
+  "keywords": [
+    "ai",
+    "agent",
+    "angular",
+    "best-practices",
+    "cursor",
+    "copilot"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0"
+  }
+}
