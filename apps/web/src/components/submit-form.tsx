@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRuleGeneration } from '@/hooks/use-rule-generation'
 import { ruleToMarkdown, type GeneratedRule } from '@/lib/schemas'
+import { signIn } from 'next-auth/react'
 import { RulePreview } from './rule-preview'
 import { ImpactBadge } from './impact-badge'
 
@@ -24,6 +25,18 @@ const CATEGORY_HINTS = [
   'Data Handling / HTTP',
 ]
 
+const REPO_URL = 'https://github.com/alfredoperez/angular-best-practices'
+
+function buildIssueUrl(description: string, category: string) {
+  const params = new URLSearchParams({
+    template: 'rule-suggestion.yml',
+    title: `[Rule]: ${description.slice(0, 80)}`,
+    description,
+    ...(category && { category }),
+  })
+  return `${REPO_URL}/issues/new?${params}`
+}
+
 export function SubmitForm() {
   const [step, setStep] = useState<Step>('describe')
   const [description, setDescription] = useState('')
@@ -39,9 +52,20 @@ export function SubmitForm() {
   }
 
   // Transition from generating to review when done
-  if (step === 'generating' && !isLoading && rule && rule.filename) {
-    setStep('review')
-  }
+  useEffect(() => {
+    if (step !== 'generating' || isLoading) return
+
+    if (rule && rule.filename) {
+      setStep('review')
+    }
+  }, [step, isLoading, rule])
+
+  // Handle auth errors from generate endpoint
+  useEffect(() => {
+    if (step === 'generating' && error?.message?.includes('Unauthorized')) {
+      signIn('github', { callbackUrl: '/submit' })
+    }
+  }, [step, error])
 
   const handleCreatePR = async () => {
     if (!rule) return
@@ -54,6 +78,10 @@ export function SubmitForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ rule }),
       })
+      if (res.status === 401) {
+        signIn('github', { callbackUrl: '/submit' })
+        return
+      }
       const data = await res.json()
       if (data.error) {
         setPrError(data.error)
@@ -145,28 +173,58 @@ export function SubmitForm() {
             </select>
           </div>
 
-          <button
-            onClick={handleGenerate}
-            disabled={!description.trim()}
-            className="rounded border border-accent bg-accent/10 px-6 py-2.5 text-sm text-accent hover:bg-accent/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Generate Rule
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handleGenerate}
+              disabled={!description.trim()}
+              className="rounded border border-accent bg-accent/10 px-6 py-2.5 text-sm text-accent hover:bg-accent/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Generate Rule
+            </button>
+            <span className="text-xs text-text-dim">or</span>
+            <a
+              href={buildIssueUrl(description, categoryHint)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-text-muted hover:text-text transition-colors"
+            >
+              Submit as GitHub Issue
+            </a>
+          </div>
         </div>
       )}
 
       {/* Step 2: Generating */}
       {(step === 'generating' || step === 'review') && (
         <div className="space-y-4">
-          {isLoading && (
-            <p className="text-sm text-text-muted animate-pulse">
-              Generating rule...
-            </p>
+          {(isLoading || (step === 'generating' && !rule && !error)) && (
+            <div className="flex items-center gap-3">
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-accent border-t-transparent" />
+              <p className="text-sm text-text-muted">
+                Generating rule with AI...
+              </p>
+            </div>
           )}
 
           {error && (
-            <div className="rounded border border-impact-critical/30 bg-impact-critical/5 p-4 text-sm text-impact-critical">
-              {error.message}
+            <div className="space-y-3">
+              <div className="rounded border border-impact-critical/30 bg-impact-critical/5 p-4 text-sm text-impact-critical">
+                <p>{error.message}</p>
+                <a
+                  href={buildIssueUrl(description, categoryHint)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block mt-2 text-accent hover:text-accent-hover transition-colors"
+                >
+                  Submit as GitHub Issue instead
+                </a>
+              </div>
+              <button
+                onClick={() => setStep('describe')}
+                className="rounded border border-border px-6 py-2.5 text-sm text-text-muted hover:border-border-bright transition-colors"
+              >
+                Start Over
+              </button>
             </div>
           )}
 
