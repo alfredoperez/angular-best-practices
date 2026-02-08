@@ -89,16 +89,21 @@ Comprehensive guidelines for building performant, maintainable Angular applicati
    - 10.1 [Create Reusable Validators](#101-create-reusable-validators)
    - 10.2 [Handle Form Submission Properly](#102-handle-form-submission-properly)
    - 10.3 [Use ControlValueAccessor for Custom Controls](#103-use-controlvalueaccessor-for-custom-controls)
-   - 10.4 [Use Typed Reactive Forms](#104-use-typed-reactive-forms)
+   - 10.4 [Use ngx-formly for Dynamic Forms](#104-use-ngx-formly-for-dynamic-forms)
+   - 10.5 [Use Typed Reactive Forms](#105-use-typed-reactive-forms)
 11. [Architecture](#11-architecture) — **HIGH**
    - 11.1 [Enforce Module Boundaries](#111-enforce-module-boundaries)
    - 11.2 [Use Barrel Files for Public APIs](#112-use-barrel-files-for-public-apis)
    - 11.3 [Use Domain-Driven Folder Structure](#113-use-domain-driven-folder-structure)
 12. [Testing](#12-testing) — **HIGH**
-   - 12.1 [Component Testing with Angular Testing Library](#121-component-testing-with-angular-testing-library)
-   - 12.2 [E2E Testing with Playwright](#122-e2e-testing-with-playwright)
-   - 12.3 [Mocking with ng-mocks and MSW](#123-mocking-with-ng-mocks-and-msw)
-   - 12.4 [Unit Testing with Vitest](#124-unit-testing-with-vitest)
+   - 12.1 [Automate Accessibility Testing with axe-core](#121-automate-accessibility-testing-with-axe-core)
+   - 12.2 [Component Testing with Angular Testing Library](#122-component-testing-with-angular-testing-library)
+   - 12.3 [E2E Testing with Playwright](#123-e2e-testing-with-playwright)
+   - 12.4 [Mocking with ng-mocks and MSW](#124-mocking-with-ng-mocks-and-msw)
+   - 12.5 [Test Signals and Computed Values](#125-test-signals-and-computed-values)
+   - 12.6 [Unit Testing with Vitest](#126-unit-testing-with-vitest)
+   - 12.7 [Use CDK Component Test Harnesses](#127-use-cdk-component-test-harnesses)
+   - 12.8 [Use Object Mothers for Test Data](#128-use-object-mothers-for-test-data)
 13. [Infrastructure](#13-infrastructure) — **MEDIUM**
    - 13.1 [Error Handling Patterns](#131-error-handling-patterns)
    - 13.2 [Lazy Load Routes and Components](#132-lazy-load-routes-and-components)
@@ -110,9 +115,13 @@ Comprehensive guidelines for building performant, maintainable Angular applicati
    - 13.8 [Use Functional Route Resolvers](#138-use-functional-route-resolvers)
    - 13.9 [Use Route Input Binding](#139-use-route-input-binding)
 14. [UI & Accessibility](#14-ui-accessibility) — **MEDIUM**
-   - 14.1 [Accessibility (a11y)](#141-accessibility-a11y-)
+   - 14.1 [Ensure Keyboard Navigation](#141-ensure-keyboard-navigation)
    - 14.2 [Loading State Patterns](#142-loading-state-patterns)
-   - 14.3 [Theming Patterns](#143-theming-patterns)
+   - 14.3 [Manage Focus with CDK FocusTrap](#143-manage-focus-with-cdk-focustrap)
+   - 14.4 [Meet WCAG Color Contrast Ratios](#144-meet-wcag-color-contrast-ratios)
+   - 14.5 [Respect prefers-reduced-motion](#145-respect-prefers-reduced-motion)
+   - 14.6 [Theming Patterns](#146-theming-patterns)
+   - 14.7 [Use ARIA Roles and Live Regions](#147-use-aria-roles-and-live-regions)
 15. [Data Handling](#15-data-handling) — **MEDIUM**
    - 15.1 [Compose Mappers for Nested Data](#151-compose-mappers-for-nested-data)
    - 15.2 [HTTP Client Patterns](#152-http-client-patterns)
@@ -958,7 +967,29 @@ export class RatingComponent implements ControlValueAccessor {
 }
 ```
 
-### 10.4 Use Typed Reactive Forms
+### 10.4 Use ngx-formly for Dynamic Forms
+
+**Impact: MEDIUM** (Reduces form boilerplate by 60-80%)
+
+Use ngx-formly for forms driven by configuration (JSON/API). Define field configs instead of writing template markup. Create reusable custom field types for domain-specific inputs.
+
+**Incorrect:**
+
+```html
+<!-- Manually building 50+ fields with repeated template markup -->
+<input *ngFor="let f of fields" [formControlName]="f.key" [type]="f.type" />
+```
+
+**Correct:**
+
+```typescript
+fields: FormlyFieldConfig[] = [
+  { key: 'name', type: 'input', props: { label: 'Name', required: true } },
+  { key: 'role', type: 'select', props: { label: 'Role', options: this.roles$ } },
+];
+```
+
+### 10.5 Use Typed Reactive Forms
 
 **Impact: HIGH** (Type-safe forms, better autocomplete)
 
@@ -1029,7 +1060,30 @@ src/app/domains/
 
 **Impact: HIGH** (Reliability)
 
-### 12.1 Component Testing with Angular Testing Library
+### 12.1 Automate Accessibility Testing with axe-core
+
+**Impact: HIGH** (Catches WCAG violations automatically)
+
+Use `vitest-axe` or `jest-axe` to check rendered components for WCAG violations. Run `axe()` on the container element after rendering and assert no violations.
+
+**Incorrect:**
+
+```typescript
+it('should be accessible', () => {
+  // Manual visual check only — misses hidden violations
+});
+```
+
+**Correct:**
+
+```typescript
+it('should have no a11y violations', async () => {
+  const { container } = await render(MyComponent);
+  expect(await axe(container)).toHaveNoViolations();
+});
+```
+
+### 12.2 Component Testing with Angular Testing Library
 
 **Impact: HIGH** (user-centric, reliable component tests)
 
@@ -1045,7 +1099,7 @@ it('should increment count', async () => {
 });
 ```
 
-### 12.2 E2E Testing with Playwright
+### 12.3 E2E Testing with Playwright
 
 **Impact: MEDIUM** (reliable end-to-end user journey tests)
 
@@ -1062,7 +1116,7 @@ test('user can login', async ({ page }) => {
 });
 ```
 
-### 12.3 Mocking with ng-mocks and MSW
+### 12.4 Mocking with ng-mocks and MSW
 
 **Impact: MEDIUM** (Isolated, reliable tests)
 
@@ -1077,7 +1131,28 @@ TestBed.configureTestingModule({
 });
 ```
 
-### 12.4 Unit Testing with Vitest
+### 12.5 Test Signals and Computed Values
+
+**Impact: HIGH** (Verifies reactive state logic)
+
+Test signals by setting values and asserting computed results. Use `TestBed.flushEffects()` to trigger pending effects. Wrap signal reads in `TestBed.runInInjectionContext` when needed.
+
+**Incorrect:**
+
+```typescript
+// Testing implementation details instead of behavior
+expect(component['_count']).toBe(1);
+```
+
+**Correct:**
+
+```typescript
+component.count.set(5);
+expect(component.doubled()).toBe(10);
+TestBed.flushEffects(); // Flush pending effects if needed
+```
+
+### 12.6 Unit Testing with Vitest
 
 **Impact: HIGH** (Fast, reliable tests for services and logic)
 
@@ -1090,6 +1165,48 @@ it('should fetch users', async () => {
   TestBed.configureTestingModule({ imports: [HttpClientTestingModule] });
   const service = TestBed.inject(UserService);
   expect(await firstValueFrom(service.getUsers())).toBeDefined();
+});
+```
+
+### 12.7 Use CDK Component Test Harnesses
+
+**Impact: HIGH** (Stable tests decoupled from DOM structure)
+
+Use CDK test harnesses (`HarnessLoader`) to interact with Angular Material and custom components in tests. Harnesses abstract DOM details, making tests resilient to template changes.
+
+**Incorrect:**
+
+```typescript
+const button = fixture.debugElement.query(By.css('.mat-mdc-button'));
+button.nativeElement.click(); // Breaks if class name changes
+```
+
+**Correct:**
+
+```typescript
+const loader = TestbedHarnessEnvironment.loader(fixture);
+const button = await loader.getHarness(MatButtonHarness.with({ text: 'Save' }));
+await button.click();
+```
+
+### 12.8 Use Object Mothers for Test Data
+
+**Impact: MEDIUM** (Consistent, maintainable test fixtures)
+
+Create factory functions (Object Mothers) that return valid default objects with optional overrides. Centralizes test data and ensures consistency across test suites.
+
+**Incorrect:**
+
+```typescript
+const user = { id: '1', name: 'John', email: 'j@e.com', role: 'admin', createdAt: new Date() };
+// Duplicated in every test file
+```
+
+**Correct:**
+
+```typescript
+export const createUser = (overrides: Partial<User> = {}): User => ({
+  id: crypto.randomUUID(), name: 'John', email: 'john@example.com', ...overrides,
 });
 ```
 
@@ -1225,24 +1342,24 @@ Enable `withComponentInputBinding()` in router config to bind route params, quer
 
 **Impact: MEDIUM** (User experience)
 
-### 14.1 Accessibility (a11y)
+### 14.1 Ensure Keyboard Navigation
 
-**Impact: MEDIUM** (Inclusive design and WCAG compliance)
+**Impact: MEDIUM** (Keyboard-only user access)
 
-Use semantic HTML (`<button>`, not `<div onclick>`). Ensure keyboard access with `tabindex` and `keyup.enter`. Use `LiveAnnouncer` for dynamic changes. Use `cdkTrapFocus` for modals.
+All interactive elements must be keyboard-accessible. Use native `<button>` and `<a>` elements. For custom widgets, add `tabindex="0"` and handle `keydown.enter`/`keydown.space` events.
 
 **Incorrect:**
 
 ```html
-<div (click)="save()">Save</div>
+<div class="tab" (click)="selectTab(i)">{{ tab.label }}</div>
 ```
 
 **Correct:**
 
 ```html
-<button (click)="save()">Save</button>
-<!-- Or if not button: -->
-<span role="button" tabindex="0" (click)="toggle()" (keyup.enter)="toggle()">Toggle</span>
+<button role="tab" [attr.aria-selected]="isActive(i)" (click)="selectTab(i)">
+  {{ tab.label }}
+</button>
 ```
 
 ### 14.2 Loading State Patterns
@@ -1265,7 +1382,70 @@ Use skeleton loaders matching content shape to prevent CLS. Disable buttons duri
 }
 ```
 
-### 14.3 Theming Patterns
+### 14.3 Manage Focus with CDK FocusTrap
+
+**Impact: MEDIUM** (Accessible modals and overlays)
+
+Use `cdkTrapFocus` for dialogs and overlays to prevent focus from escaping. Restore focus to the trigger element on close. Use `cdkFocusInitial` to set the initially focused element.
+
+**Incorrect:**
+
+```html
+<div class="modal">
+  <input placeholder="Name" />
+  <button (click)="close()">Close</button>
+</div>
+```
+
+**Correct:**
+
+```html
+<div class="modal" cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+  <input cdkFocusInitial placeholder="Name" />
+  <button (click)="close()">Close</button>
+</div>
+```
+
+### 14.4 Meet WCAG Color Contrast Ratios
+
+**Impact: MEDIUM** (Readability for low-vision users)
+
+Text must meet WCAG AA contrast ratios: 4.5:1 for normal text, 3:1 for large text (18px+ bold or 24px+). Use CSS custom properties for theme colors and validate with browser dev tools.
+
+**Incorrect:**
+
+```css
+.label { color: #aaa; background: #fff; } /* 2.3:1 ratio — fails AA */
+```
+
+**Correct:**
+
+```css
+.label { color: #595959; background: #fff; } /* 7:1 ratio — passes AA */
+```
+
+### 14.5 Respect prefers-reduced-motion
+
+**Impact: MEDIUM** (Prevents motion sickness triggers)
+
+Disable or simplify animations for users who prefer reduced motion. Use the `prefers-reduced-motion` media query. In Angular animations, check the preference before applying transitions.
+
+**Incorrect:**
+
+```css
+.card { transition: transform 0.5s ease; }
+```
+
+**Correct:**
+
+```css
+.card { transition: transform 0.5s ease; }
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
+}
+```
+
+### 14.6 Theming Patterns
 
 **Impact: MEDIUM** (Consistent design and dark mode)
 
@@ -1282,6 +1462,29 @@ Define theme values as CSS custom properties (`--border-color`). Support dark mo
 
 ```typescript
 isMobile = toSignal(this.breakpointObserver.observe('(max-width: 768px)').pipe(map(r => r.matches)));
+```
+
+### 14.7 Use ARIA Roles and Live Regions
+
+**Impact: MEDIUM** (Screen reader compatibility)
+
+Use semantic HTML elements first (`<nav>`, `<main>`, `<button>`). Add ARIA roles only when native semantics are insufficient. Use `LiveAnnouncer` to announce dynamic content changes to screen readers.
+
+**Incorrect:**
+
+```html
+<div class="nav-menu">
+  <div (click)="navigate()">Home</div>
+</div>
+```
+
+**Correct:**
+
+```typescript
+// Use semantic HTML for navigation
+// template: <nav aria-label="Main"><a routerLink="/">Home</a></nav>
+// Announce dynamic changes for screen readers
+this.liveAnnouncer.announce('Item saved successfully');
 ```
 
 ---
