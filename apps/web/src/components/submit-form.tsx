@@ -7,6 +7,9 @@ import { signIn } from 'next-auth/react'
 import { RulePreview } from './rule-preview'
 import { ImpactBadge } from './impact-badge'
 
+// Set to true to enable AI-powered rule generation (requires Gemini API quota)
+const AI_GENERATION_ENABLED = false
+
 type Step = 'describe' | 'generating' | 'review' | 'creating' | 'done'
 
 const CATEGORY_HINTS = [
@@ -109,27 +112,29 @@ export function SubmitForm() {
   return (
     <div className="space-y-8">
       {/* Step indicator */}
-      <div className="flex items-center gap-2 text-xs text-text-dim">
-        <span className={step === 'describe' ? 'text-text' : ''}>
-          1. Describe
-        </span>
-        <span>→</span>
-        <span
-          className={
-            step === 'generating' || step === 'review' ? 'text-text' : ''
-          }
-        >
-          2. Generate
-        </span>
-        <span>→</span>
-        <span
-          className={
-            step === 'creating' || step === 'done' ? 'text-text' : ''
-          }
-        >
-          3. Submit PR
-        </span>
-      </div>
+      {AI_GENERATION_ENABLED && (
+        <div className="flex items-center gap-2 text-xs text-text-dim">
+          <span className={step === 'describe' ? 'text-text' : ''}>
+            1. Describe
+          </span>
+          <span>→</span>
+          <span
+            className={
+              step === 'generating' || step === 'review' ? 'text-text' : ''
+            }
+          >
+            2. Generate
+          </span>
+          <span>→</span>
+          <span
+            className={
+              step === 'creating' || step === 'done' ? 'text-text' : ''
+            }
+          >
+            3. Submit PR
+          </span>
+        </div>
+      )}
 
       {/* Step 1: Describe */}
       {step === 'describe' && (
@@ -156,7 +161,7 @@ export function SubmitForm() {
               htmlFor="category"
               className="block text-sm text-text-muted mb-2"
             >
-              Category hint (optional)
+              Category (optional)
             </label>
             <select
               id="category"
@@ -174,19 +179,25 @@ export function SubmitForm() {
           </div>
 
           <div className="flex items-center gap-3">
-            <button
-              onClick={handleGenerate}
-              disabled={!description.trim()}
-              className="rounded border border-accent bg-accent/10 px-6 py-2.5 text-sm text-accent hover:bg-accent/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Generate Rule
-            </button>
-            <span className="text-xs text-text-dim">or</span>
+            {AI_GENERATION_ENABLED && (
+              <>
+                <button
+                  onClick={handleGenerate}
+                  disabled={!description.trim()}
+                  className="rounded border border-accent bg-accent/10 px-6 py-2.5 text-sm text-accent hover:bg-accent/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Generate Rule
+                </button>
+                <span className="text-xs text-text-dim">or</span>
+              </>
+            )}
             <a
               href={buildIssueUrl(description, categoryHint)}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-text-muted hover:text-text transition-colors"
+              className={`inline-block rounded border border-accent bg-accent/10 px-6 py-2.5 text-sm text-accent hover:bg-accent/20 transition-colors ${
+                !description.trim() ? 'opacity-50 pointer-events-none' : ''
+              }`}
             >
               Submit as GitHub Issue
             </a>
@@ -194,8 +205,8 @@ export function SubmitForm() {
         </div>
       )}
 
-      {/* Step 2: Generating */}
-      {(step === 'generating' || step === 'review') && (
+      {/* Step 2: Generating (only when AI generation is enabled) */}
+      {AI_GENERATION_ENABLED && (step === 'generating' || step === 'review') && (
         <div className="space-y-4">
           {(isLoading || (step === 'generating' && !rule && !error)) && (
             <div className="flex items-center gap-3">
@@ -286,14 +297,14 @@ export function SubmitForm() {
       )}
 
       {/* Step 3: Creating PR */}
-      {step === 'creating' && (
+      {AI_GENERATION_ENABLED && step === 'creating' && (
         <p className="text-sm text-text-muted animate-pulse">
           Creating pull request...
         </p>
       )}
 
       {/* Done */}
-      {step === 'done' && prUrl && (
+      {AI_GENERATION_ENABLED && step === 'done' && prUrl && (
         <div className="space-y-4">
           <div className="rounded border border-impact-low/30 bg-impact-low/5 p-4 space-y-2">
             <p className="text-sm text-impact-low">

@@ -6,8 +6,8 @@ export default function SubmitPage() {
       <div>
         <h1 className="text-lg font-medium text-text">Submit a Rule</h1>
         <p className="text-sm text-text-muted mt-1">
-          Describe an Angular best practice and AI will format it into a rule
-          file. Review the result, then submit it as a pull request.
+          Describe an Angular best practice and submit it as a GitHub issue for
+          review.
         </p>
       </div>
 
