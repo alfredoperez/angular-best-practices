@@ -104,7 +104,7 @@ export function SubmitForm() {
     setPrError(null)
   }
 
-  const ruleMarkdown = rule ? ruleToMarkdown(rule as GeneratedRule) : ''
+  const ruleMarkdown = rule ? ruleToMarkdown(rule) : ''
 
   return (
     <div className="space-y-8">
