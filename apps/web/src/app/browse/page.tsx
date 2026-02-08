@@ -11,6 +11,7 @@ export default function BrowsePage() {
       filename: r.filename,
       title: r.title,
       impact: r.impact,
+      body: r.body,
     })),
   }))
 

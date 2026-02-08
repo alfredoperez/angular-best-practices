@@ -16,7 +16,7 @@ rules/                    # Rule files organized by category
   _template.md            # Template for new rules
   _sections.md            # Category definitions
 skills/                   # All skills (generated AGENTS.md + SKILL.md)
-  angular-best-practices/           # Core skill (93 rules)
+  angular-best-practices/           # Core skill (117 rules)
   angular-best-practices-ngrx/      # NgRx rules (5 rules)
   angular-best-practices-signalstore/ # SignalStore rules (4 rules)
   angular-best-practices-tanstack/  # TanStack Query rules (4 rules)

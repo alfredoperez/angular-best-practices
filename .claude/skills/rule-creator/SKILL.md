@@ -68,7 +68,7 @@ When asked to create a new optional library skill:
 | `tanstack` | 14 | TanStack Query |
 | `arch` | 15 | Architecture |
 | `test` | 16 | Testing |
-| `core`, `error-handling`, `observability`, `pattern`, `routing`, `security` | 17 | Infrastructure |
+| `core`, `di`, `error-handling`, `observability`, `pattern`, `routing`, `security` | 17 | Infrastructure |
 | `ui`, `a11y`, `loading`, `dialogs`, `theming` | 18 | UI & Accessibility |
 | `http`, `mapper` | 19 | Data Handling |
 | `material` | 20 | Angular Material |
@@ -85,7 +85,7 @@ When asked to create a new optional library skill:
 | `rules/ui/` | ui, a11y, loading, dialogs, theming |
 | `rules/typescript/` | ts |
 | `rules/optimization/` | opt, bundle, async, performance |
-| `rules/core/` | arch, core, error-handling, observability, pattern, routing, security |
+| `rules/core/` | arch, core, di, error-handling, observability, pattern, routing, security |
 | `rules/data/` | http, mapper |
 
 ## Template Reference

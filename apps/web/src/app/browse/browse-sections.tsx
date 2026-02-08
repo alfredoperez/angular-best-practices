@@ -3,10 +3,22 @@
 import { useState, useMemo } from 'react'
 import { ImpactBadge } from '@/components/impact-badge'
 
+interface CodeBlock {
+  lang: string
+  content: string
+}
+
+interface RuleBody {
+  description: string
+  incorrectCode?: CodeBlock
+  correctCode?: CodeBlock
+}
+
 interface RuleItem {
   filename: string
   title: string
   impact: string
+  body?: RuleBody
 }
 
 interface SectionWithRules {
@@ -42,6 +54,7 @@ export function BrowseSections({
   sections: SectionWithRules[]
 }) {
   const [expanded, setExpanded] = useState<Set<number>>(new Set())
+  const [expandedRules, setExpandedRules] = useState<Set<string>>(new Set())
   const [search, setSearch] = useState('')
 
   const toggle = (n: number) => {
@@ -49,6 +62,15 @@ export function BrowseSections({
       const next = new Set(prev)
       if (next.has(n)) next.delete(n)
       else next.add(n)
+      return next
+    })
+  }
+
+  const toggleRule = (filename: string) => {
+    setExpandedRules((prev) => {
+      const next = new Set(prev)
+      if (next.has(filename)) next.delete(filename)
+      else next.add(filename)
       return next
     })
   }
@@ -72,7 +94,10 @@ export function BrowseSections({
 
           const sectionTitleMatch = section.title.toLowerCase().includes(query)
           const matchingRules = section.rules.filter((r) =>
-            r.title.toLowerCase().includes(query)
+            r.title.toLowerCase().includes(query) ||
+            r.body?.description.toLowerCase().includes(query) ||
+            r.body?.incorrectCode?.content.toLowerCase().includes(query) ||
+            r.body?.correctCode?.content.toLowerCase().includes(query)
           )
 
           if (sectionTitleMatch) {
@@ -206,12 +231,29 @@ export function BrowseSections({
               {expandedSet.has(section.number) && (
                 <div className="ml-10 border-l border-border pl-4 py-2 space-y-1">
                   {filteredRules.map((rule) => (
-                    <div
-                      key={rule.filename}
-                      className="flex items-center gap-3 py-1.5 text-sm"
-                    >
-                      <span className="flex-1 text-text-muted">{rule.title}</span>
-                      <ImpactBadge impact={rule.impact} />
+                    <div key={rule.filename}>
+                      <button
+                        onClick={() => toggleRule(rule.filename)}
+                        className="flex w-full items-center gap-3 py-1.5 text-sm text-left hover:bg-bg-hover rounded px-2 -mx-2 transition-colors"
+                      >
+                        {rule.body && (
+                          <svg
+                            className={`w-3 h-3 text-text-dim shrink-0 transition-transform duration-200 ${
+                              expandedRules.has(rule.filename) ? 'rotate-90' : ''
+                            }`}
+                            viewBox="0 0 16 16"
+                            fill="currentColor"
+                          >
+                            <path d="M6 3l5 5-5 5V3z" />
+                          </svg>
+                        )}
+                        {!rule.body && <span className="w-3 shrink-0" />}
+                        <span className="flex-1 text-text-muted">{rule.title}</span>
+                        <ImpactBadge impact={rule.impact} />
+                      </button>
+                      {expandedRules.has(rule.filename) && rule.body && (
+                        <RuleContent body={rule.body} />
+                      )}
                     </div>
                   ))}
                   {filteredRules.length === 0 && (
@@ -231,6 +273,38 @@ export function BrowseSections({
         <p className="text-sm text-text-dim text-center py-8">
           No rules matching &ldquo;{search.trim()}&rdquo;
         </p>
+      )}
+    </div>
+  )
+}
+
+function RuleCodeBlock({ code, label, color }: { code: CodeBlock; label: string; color: 'red' | 'green' }) {
+  const borderColor = color === 'red' ? 'border-red-500/30' : 'border-green-500/30'
+  const labelColor = color === 'red' ? 'text-red-400' : 'text-green-400'
+
+  return (
+    <div>
+      <span className={`text-xs font-medium ${labelColor}`}>{label}</span>
+      <pre className={`mt-1 rounded border ${borderColor} bg-[#050505] px-3 py-2 text-xs leading-relaxed overflow-x-auto`}>
+        <code className="text-text-muted">{code.content}</code>
+      </pre>
+    </div>
+  )
+}
+
+function RuleContent({ body }: { body: RuleBody }) {
+  return (
+    <div className="ml-5 mt-1 mb-3 space-y-3">
+      <p className="text-sm text-text-muted leading-relaxed">{body.description}</p>
+      {body.incorrectCode && (
+        <RuleCodeBlock code={body.incorrectCode} label="Incorrect" color="red" />
+      )}
+      {body.correctCode && (
+        <RuleCodeBlock
+          code={body.correctCode}
+          label={body.incorrectCode ? 'Correct' : ''}
+          color="green"
+        />
       )}
     </div>
   )
