@@ -15,3 +15,5 @@ Thumbs.db
 
 # Local Claude files (personal settings)
 .claude/settings.local.json
+
+apps/web/.next/

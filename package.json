@@ -2,6 +2,7 @@
   "name": "angular-best-practices",
   "version": "1.0.0",
   "description": "Angular Best Practices for AI Agents",
+  "workspaces": ["packages/*", "apps/*"],
   "scripts": {
     "build": "npm run build:agents",
     "build:agents": "tsx packages/angular-best-practices-build/src/build.ts",
