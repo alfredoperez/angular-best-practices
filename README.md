@@ -2,6 +2,8 @@
 
 Concise, actionable Angular best practices optimized for AI agents and LLMs.
 
+**Web app:** [angular-best-practices-web.vercel.app](https://angular-best-practices-web.vercel.app/)
+
 ## Installation
 
 Install into your AI coding agent:

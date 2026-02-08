@@ -1,5 +1,5 @@
 import { streamObject } from 'ai'
-import { anthropic } from '@ai-sdk/anthropic'
+import { google } from '@ai-sdk/google'
 import { auth, checkRateLimit, recordRequest } from '@/lib/auth'
 import { generatedRuleSchema } from '@/lib/schemas'
 import { buildSystemPrompt } from '@/lib/system-prompt'
@@ -38,10 +38,11 @@ export async function POST(req: Request) {
     : `Create a rule for: ${description}`
 
   const result = streamObject({
-    model: anthropic('claude-sonnet-4-5-20250929'),
+    model: google('gemini-2.0-flash'),
     schema: generatedRuleSchema,
     system: systemPrompt,
     prompt: userPrompt,
+    mode: 'json',
   })
 
   return result.toTextStreamResponse()
