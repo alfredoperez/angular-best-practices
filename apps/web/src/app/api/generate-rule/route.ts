@@ -1,4 +1,4 @@
-import { streamObject } from 'ai'
+import { generateObject } from 'ai'
 import { google } from '@ai-sdk/google'
 import { auth, checkRateLimit, recordRequest } from '@/lib/auth'
 import { generatedRuleSchema } from '@/lib/schemas'
@@ -35,15 +35,14 @@ export async function POST(req: Request) {
     : `Create a rule for: ${description}`
 
   try {
-    const result = streamObject({
+    const { object } = await generateObject({
       model: google('gemini-2.0-flash'),
       schema: generatedRuleSchema,
       system: systemPrompt,
       prompt: userPrompt,
-      mode: 'json',
     })
 
-    return result.toTextStreamResponse()
+    return Response.json(object)
   } catch (err) {
     const message = err instanceof Error ? err.message : 'AI generation failed'
     return Response.json({ error: message }, { status: 502 })
