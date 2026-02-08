@@ -30,28 +30,44 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
 })
 
-// Rate limiting: 5 submissions per hour per user
+// Rate limiting: 3 per user per day, 20 global per day
 const rateLimitMap = new Map<string, number[]>()
+const globalTimestamps: number[] = []
+
+const WINDOW_MS = 24 * 60 * 60 * 1000 // 24 hours
+const MAX_PER_USER = 3
+const MAX_GLOBAL = 20
+
+function pruneTimestamps(timestamps: number[], now: number): number[] {
+  return timestamps.filter((t) => now - t < WINDOW_MS)
+}
 
 export function checkRateLimit(userId: string): { allowed: boolean; remaining: number } {
   const now = Date.now()
-  const windowMs = 60 * 60 * 1000 // 1 hour
-  const maxRequests = 5
 
-  const timestamps = (rateLimitMap.get(userId) ?? []).filter(
-    (t) => now - t < windowMs
-  )
-  rateLimitMap.set(userId, timestamps)
-
-  if (timestamps.length >= maxRequests) {
+  // Global limit
+  const prunedGlobal = pruneTimestamps(globalTimestamps, now)
+  globalTimestamps.length = 0
+  globalTimestamps.push(...prunedGlobal)
+  if (prunedGlobal.length >= MAX_GLOBAL) {
     return { allowed: false, remaining: 0 }
   }
 
-  return { allowed: true, remaining: maxRequests - timestamps.length }
+  // Per-user limit
+  const timestamps = pruneTimestamps(rateLimitMap.get(userId) ?? [], now)
+  rateLimitMap.set(userId, timestamps)
+
+  if (timestamps.length >= MAX_PER_USER) {
+    return { allowed: false, remaining: 0 }
+  }
+
+  return { allowed: true, remaining: MAX_PER_USER - timestamps.length }
 }
 
 export function recordRequest(userId: string) {
+  const now = Date.now()
   const timestamps = rateLimitMap.get(userId) ?? []
-  timestamps.push(Date.now())
+  timestamps.push(now)
   rateLimitMap.set(userId, timestamps)
+  globalTimestamps.push(now)
 }

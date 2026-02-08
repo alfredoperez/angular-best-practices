@@ -5,7 +5,7 @@ import { generatedRuleSchema } from '@/lib/schemas'
 export async function POST(req: Request) {
   const session = await auth()
   if (!session?.user) {
-    return new Response('Unauthorized', { status: 401 })
+    return Response.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
   const body = await req.json()

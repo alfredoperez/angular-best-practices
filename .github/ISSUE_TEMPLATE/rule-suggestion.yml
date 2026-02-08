@@ -1,0 +1,57 @@
+name: Rule Suggestion
+description: Suggest a new Angular best practice rule
+title: "[Rule]: "
+labels: ["rule-suggestion"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Rule Description
+      description: Describe the Angular best practice you'd like to add.
+      placeholder: "e.g., Always use trackBy with ngFor to prevent unnecessary DOM re-renders..."
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Which category does this rule belong to?
+      options:
+        - Auto-detect
+        - Performance / Optimization
+        - TypeScript
+        - Signals & Reactivity
+        - Component Patterns
+        - RxJS
+        - Change Detection
+        - SSR / Hydration
+        - Forms
+        - Architecture
+        - Testing
+        - UI / Accessibility
+        - Data Handling / HTTP
+    validations:
+      required: false
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact Level
+      description: How impactful is this rule?
+      options:
+        - Not sure
+        - CRITICAL
+        - HIGH
+        - MEDIUM-HIGH
+        - MEDIUM
+        - LOW-MEDIUM
+        - LOW
+    validations:
+      required: false
+  - type: textarea
+    id: examples
+    attributes:
+      label: Code Examples (optional)
+      description: Show incorrect and correct code if possible.
+      render: typescript
+    validations:
+      required: false
