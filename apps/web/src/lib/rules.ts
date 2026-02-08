@@ -3,6 +3,12 @@ import path from 'path'
 
 const RULES_DIR = path.join(process.cwd(), '../../rules')
 
+export interface RuleBody {
+  description: string
+  incorrectCode?: { lang: string; content: string }
+  correctCode?: { lang: string; content: string }
+}
+
 export interface RuleInfo {
   filename: string
   title: string
@@ -11,6 +17,7 @@ export interface RuleInfo {
   tags: string[]
   section: number
   category: string
+  body?: RuleBody
 }
 
 const SECTION_MAP: Record<string, number> = {
@@ -70,6 +77,49 @@ function parseFrontmatter(content: string): Record<string, string> {
   return fm
 }
 
+function parseCodeBlock(text: string): { lang: string; content: string } | undefined {
+  const match = text.match(/```(\w*)\n([\s\S]*?)```/)
+  if (!match) return undefined
+  return { lang: match[1] || 'text', content: match[2].trimEnd() }
+}
+
+function parseBody(content: string): RuleBody | undefined {
+  // Strip frontmatter
+  if (!content.startsWith('---')) return undefined
+  const fmEnd = content.indexOf('---', 3)
+  if (fmEnd === -1) return undefined
+  let body = content.slice(fmEnd + 3).trim()
+
+  // Remove ## heading line
+  body = body.replace(/^##\s+.*\n*/, '')
+
+  // Split on **Incorrect:** / **Correct:** markers
+  const incorrectIdx = body.indexOf('**Incorrect:**')
+  const correctIdx = body.indexOf('**Correct:**')
+
+  let description: string
+  let incorrectCode: { lang: string; content: string } | undefined
+  let correctCode: { lang: string; content: string } | undefined
+
+  if (incorrectIdx !== -1 && correctIdx !== -1) {
+    description = body.slice(0, incorrectIdx).trim()
+    incorrectCode = parseCodeBlock(body.slice(incorrectIdx, correctIdx))
+    correctCode = parseCodeBlock(body.slice(correctIdx))
+  } else {
+    // Single code block or no code blocks
+    const codeMatch = body.match(/```(\w*)\n([\s\S]*?)```/)
+    if (codeMatch) {
+      description = body.slice(0, codeMatch.index).trim()
+      correctCode = { lang: codeMatch[1] || 'text', content: codeMatch[2].trimEnd() }
+    } else {
+      description = body.trim()
+    }
+  }
+
+  if (!description) return undefined
+  return { description, incorrectCode, correctCode }
+}
+
 export function getAllRules(): RuleInfo[] {
   const rules: RuleInfo[] = []
   const subdirs = fs.readdirSync(RULES_DIR)
@@ -95,6 +145,7 @@ export function getAllRules(): RuleInfo[] {
         tags: fm.tags ? fm.tags.split(',').map((t) => t.trim()) : [],
         section,
         category: subdir,
+        body: parseBody(content),
       })
     }
   }

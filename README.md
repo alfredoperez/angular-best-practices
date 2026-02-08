@@ -16,12 +16,12 @@ Supports: Claude Code, Cursor, Codex, OpenCode, VS Code Copilot, and 30+ more ag
 
 ### Available Skills
 
-| Skill | Description | Rules |
-|-------|-------------|-------|
-| `angular-best-practices` | Core Angular rules (~45KB) | 84 |
-| `angular-best-practices-ngrx` | NgRx state management | 5 |
-| `angular-best-practices-signalstore` | SignalStore patterns | 4 |
-| `angular-best-practices-tanstack` | TanStack Query patterns | 4 |
+| Skill | Description |
+|-------|-------------|
+| `angular-best-practices` | Core Angular rules (~45KB) |
+| `angular-best-practices-ngrx` | NgRx state management |
+| `angular-best-practices-signalstore` | SignalStore patterns |
+| `angular-best-practices-tanstack` | TanStack Query patterns |
 
 Install optional library skills alongside the core:
 
@@ -43,7 +43,7 @@ Or copy `AGENTS.md` directly to your project:
 
 ## Purpose
 
-This repository provides **100 curated rules** for building performant, maintainable Angular applications. Every rule is **human-reviewed for accuracy and token efficiency**. Each rule is designed to be:
+This repository provides **curated rules** for building performant, maintainable Angular applications. Every rule is **human-reviewed for accuracy and token efficiency**. Each rule is designed to be:
 
 - **Concise**: Under 50 lines with 1-3 line code examples
 - **Actionable**: Clear "incorrect" vs "correct" patterns
@@ -56,7 +56,7 @@ This repository provides **100 curated rules** for building performant, maintain
 │                         rules/                                  │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐        │
 │  │ angular/ │  │  core/   │  │optimize/ │  │   ts/    │  ...   │
-│  │ 44 rules │  │ 10 rules │  │ 18 rules │  │ 14 rules │        │
+│  │          │  │          │  │          │  │          │        │
 │  └────┬─────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘        │
 │       │             │             │             │               │
 │       └─────────────┴─────────────┴─────────────┘               │
@@ -70,8 +70,8 @@ This repository provides **100 curated rules** for building performant, maintain
 │                             ▼                                   │
 │                    ┌─────────────────┐                          │
 │                    │   AGENTS.md     │                          │
-│                    │  (~4,500 lines) │                          │
-│                    │  (~12k tokens)  │                          │
+│                    │  (generated)    │                          │
+│                    │                 │                          │
 │                    └─────────────────┘                          │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -84,27 +84,27 @@ AI agents load `AGENTS.md` to get all best practices in a single, structured doc
 
 ## Rule Categories
 
-| # | Category | Prefix | Rules | Impact |
-|---|----------|--------|-------|--------|
-| 1 | Eliminating Waterfalls | `async-`, `opt-async-` | 2 | CRITICAL |
-| 2 | Bundle Optimization | `bundle-` | 5 | CRITICAL |
-| 3 | JavaScript Performance | `opt-` | 11 | HIGH |
-| 4 | TypeScript Best Practices | `ts-` | 14 | MEDIUM |
-| 5 | Signals & Reactivity | `signal-` | 5 | HIGH |
-| 6 | Component Patterns | `component-` | 4 | HIGH |
-| 7 | RxJS Patterns | `rxjs-` | 5 | HIGH |
-| 8 | Change Detection | `cd-` | 5 | HIGH |
-| 9 | Template Optimization | `template-` | 1 | HIGH |
-| 10 | SSR & Hydration | `ssr-` | 4 | HIGH |
-| 11 | Forms | `form-` | 4 | MEDIUM |
-| 12 | NgRx State Management | `ngrx-` | 5 | HIGH |
-| 13 | SignalStore | `signalstore-` | 4 | HIGH |
-| 14 | TanStack Query | `tanstack-` | 4 | HIGH |
-| 15 | Architecture | `arch-` | 3 | HIGH |
-| 16 | Testing | `test-` | 6 | HIGH |
-| 17 | Infrastructure | `core/` | 10 | MEDIUM |
-| 18 | UI & Accessibility | `ui/`, `a11y-` | 4 | MEDIUM |
-| 19 | Data Handling | `http-`, `mapper-` | 4 | MEDIUM |
+| # | Category | Prefix | Impact |
+|---|----------|--------|--------|
+| 1 | Eliminating Waterfalls | `async-`, `opt-async-` | CRITICAL |
+| 2 | Bundle Optimization | `bundle-` | CRITICAL |
+| 3 | JavaScript Performance | `opt-` | HIGH |
+| 4 | TypeScript Best Practices | `ts-` | MEDIUM |
+| 5 | Signals & Reactivity | `signal-` | HIGH |
+| 6 | Component Patterns | `component-` | HIGH |
+| 7 | RxJS Patterns | `rxjs-` | HIGH |
+| 8 | Change Detection | `cd-` | HIGH |
+| 9 | Template Optimization | `template-` | HIGH |
+| 10 | SSR & Hydration | `ssr-` | HIGH |
+| 11 | Forms | `form-` | MEDIUM |
+| 12 | NgRx State Management | `ngrx-` | HIGH |
+| 13 | SignalStore | `signalstore-` | HIGH |
+| 14 | TanStack Query | `tanstack-` | HIGH |
+| 15 | Architecture | `arch-` | HIGH |
+| 16 | Testing | `test-` | HIGH |
+| 17 | Infrastructure | `core/`, `di-` | MEDIUM |
+| 18 | UI & Accessibility | `ui/`, `a11y-` | MEDIUM |
+| 19 | Data Handling | `http-`, `mapper-` | MEDIUM |
 
 ## Folder Structure
 
@@ -114,7 +114,7 @@ angular-best-practices/
 ├── rules/
 │   ├── _sections.md             # Category definitions & ordering
 │   ├── _template.md             # Template for new rules
-│   ├── angular/                 # Angular-specific rules (44)
+│   ├── angular/                 # Angular-specific rules
 │   │   ├── signal-*.md          # Signals & reactivity
 │   │   ├── component-*.md       # Component patterns
 │   │   ├── rxjs-*.md            # RxJS patterns
@@ -126,25 +126,25 @@ angular-best-practices/
 │   │   ├── ssr-*.md             # Server-side rendering
 │   │   ├── arch-*.md            # Architecture
 │   │   └── template-*.md        # Template patterns
-│   ├── core/                    # Infrastructure (10)
+│   ├── core/                    # Infrastructure
 │   │   ├── routing-*.md         # Routing patterns
 │   │   ├── pattern-*.md         # Design patterns
 │   │   ├── error-handling.md
 │   │   ├── security.md
 │   │   └── observability.md
-│   ├── optimization/            # Performance (18)
+│   ├── optimization/            # Performance
 │   │   ├── bundle-*.md          # Bundle optimization
 │   │   └── opt-*.md             # Runtime optimization
-│   ├── typescript/              # TypeScript (14)
+│   ├── typescript/              # TypeScript
 │   │   └── ts-*.md
-│   ├── testing/                 # Testing (6)
+│   ├── testing/                 # Testing
 │   │   └── test-*.md
-│   ├── ui/                      # UI & Accessibility (4)
+│   ├── ui/                      # UI & Accessibility
 │   │   ├── a11y.md
 │   │   ├── dialogs.md
 │   │   ├── loading.md
 │   │   └── theming.md
-│   └── data/                    # Data handling (4)
+│   └── data/                    # Data handling
 │       ├── http.md
 │       └── mapper-*.md
 ├── packages/
@@ -264,19 +264,19 @@ npm run build -- --exclude ngrx,signalstore,tanstack
 
 ### Library Tags
 
-| Tag | Rules | Exclude If... |
-|-----|-------|---------------|
-| `ngrx` | 5 | Not using NgRx for state |
-| `signalstore` | 4 | Not using SignalStore |
-| `tanstack` | 4 | Not using TanStack Query |
+| Tag | Exclude If... |
+|-----|---------------|
+| `ngrx` | Not using NgRx for state |
+| `signalstore` | Not using SignalStore |
+| `tanstack` | Not using TanStack Query |
 
 ### Beta Rules (Excluded by Default)
 
 Some rules are experimental and excluded from the default build:
 
-| Tag | Rules | Description |
-|-----|-------|-------------|
-| `patterns` | 3 | Design patterns (Facade, Repository, Strategy) |
+| Tag | Description |
+|-----|-------------|
+| `patterns` | Design patterns (Facade, Repository, Strategy) |
 
 These rules are still being refined. To include them:
 

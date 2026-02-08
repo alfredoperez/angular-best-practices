@@ -61,72 +61,97 @@ Comprehensive guidelines for building performant, maintainable Angular applicati
 5. [Signals & Reactivity](#5-signals-reactivity) — **HIGH**
    - 5.1 [Avoid Effects for State Propagation](#51-avoid-effects-for-state-propagation)
    - 5.2 [Use Computed for Derived State](#52-use-computed-for-derived-state)
-   - 5.3 [Use Signal Inputs](#53-use-signal-inputs)
-   - 5.4 [Use Signals for Local State](#54-use-signals-for-local-state)
-   - 5.5 [Use toSignal for Observables](#55-use-tosignal-for-observables)
-6. [RxJS Patterns](#6-rxjs-patterns) — **HIGH**
-   - 6.1 [Always Unsubscribe from Observables](#61-always-unsubscribe-from-observables)
-   - 6.2 [Handle Errors in Streams](#62-handle-errors-in-streams)
-   - 6.3 [Use combineLatest for Multiple Streams](#63-use-combinelatest-for-multiple-streams)
-   - 6.4 [Use shareReplay for Multicasting](#64-use-sharereplay-for-multicasting)
-   - 6.5 [Use switchMap for Cancellation](#65-use-switchmap-for-cancellation)
-7. [Change Detection](#7-change-detection) — **HIGH**
-   - 7.1 [Always Use trackBy in @for](#71-always-use-trackby-in-for)
-   - 7.2 [Prefer Async Pipe Over Subscribe](#72-prefer-async-pipe-over-subscribe)
-   - 7.3 [Prepare for Zoneless Angular](#73-prepare-for-zoneless-angular)
-   - 7.4 [Use OnPush Change Detection](#74-use-onpush-change-detection)
-8. [Template Optimization](#8-template-optimization) — **HIGH**
-   - 8.1 [Use Pure Pipes for Transforms](#81-use-pure-pipes-for-transforms)
-9. [SSR & Hydration](#9-ssr-hydration) — **HIGH**
-   - 9.1 [Defer Browser-Only Components](#91-defer-browser-only-components)
-   - 9.2 [Enable Client Hydration](#92-enable-client-hydration)
-   - 9.3 [Fetch Data in Parallel on Server](#93-fetch-data-in-parallel-on-server)
-   - 9.4 [Run Non-Critical Work After Response](#94-run-non-critical-work-after-response)
-   - 9.5 [Use LRU Cache for SSR Computations](#95-use-lru-cache-for-ssr-computations)
-   - 9.6 [Use Platform Checks for Browser APIs](#96-use-platform-checks-for-browser-apis)
-   - 9.7 [Use TransferState to Avoid Refetch](#97-use-transferstate-to-avoid-refetch)
-10. [Forms](#10-forms) — **MEDIUM**
-   - 10.1 [Create Reusable Validators](#101-create-reusable-validators)
-   - 10.2 [Handle Form Submission Properly](#102-handle-form-submission-properly)
-   - 10.3 [Use ControlValueAccessor for Custom Controls](#103-use-controlvalueaccessor-for-custom-controls)
-   - 10.4 [Use ngx-formly for Dynamic Forms](#104-use-ngx-formly-for-dynamic-forms)
-   - 10.5 [Use Typed Reactive Forms](#105-use-typed-reactive-forms)
-11. [Architecture](#11-architecture) — **HIGH**
-   - 11.1 [Enforce Module Boundaries](#111-enforce-module-boundaries)
-   - 11.2 [Use Barrel Files for Public APIs](#112-use-barrel-files-for-public-apis)
-   - 11.3 [Use Domain-Driven Folder Structure](#113-use-domain-driven-folder-structure)
-12. [Testing](#12-testing) — **HIGH**
-   - 12.1 [Automate Accessibility Testing with axe-core](#121-automate-accessibility-testing-with-axe-core)
-   - 12.2 [Component Testing with Angular Testing Library](#122-component-testing-with-angular-testing-library)
-   - 12.3 [E2E Testing with Playwright](#123-e2e-testing-with-playwright)
-   - 12.4 [Mocking with ng-mocks and MSW](#124-mocking-with-ng-mocks-and-msw)
-   - 12.5 [Test Signals and Computed Values](#125-test-signals-and-computed-values)
-   - 12.6 [Unit Testing with Vitest](#126-unit-testing-with-vitest)
-   - 12.7 [Use CDK Component Test Harnesses](#127-use-cdk-component-test-harnesses)
-   - 12.8 [Use Object Mothers for Test Data](#128-use-object-mothers-for-test-data)
-13. [Infrastructure](#13-infrastructure) — **MEDIUM**
-   - 13.1 [Error Handling Patterns](#131-error-handling-patterns)
-   - 13.2 [Lazy Load Routes and Components](#132-lazy-load-routes-and-components)
-   - 13.3 [Observability Patterns](#133-observability-patterns)
-   - 13.4 [Schema-Validate LocalStorage Data](#134-schema-validate-localstorage-data)
-   - 13.5 [Security Patterns](#135-security-patterns)
-   - 13.6 [Use Event Delegation for Lists](#136-use-event-delegation-for-lists)
-   - 13.7 [Use Functional Route Guards](#137-use-functional-route-guards)
-   - 13.8 [Use Functional Route Resolvers](#138-use-functional-route-resolvers)
-   - 13.9 [Use Route Input Binding](#139-use-route-input-binding)
-14. [UI & Accessibility](#14-ui-accessibility) — **MEDIUM**
-   - 14.1 [Ensure Keyboard Navigation](#141-ensure-keyboard-navigation)
-   - 14.2 [Loading State Patterns](#142-loading-state-patterns)
-   - 14.3 [Manage Focus with CDK FocusTrap](#143-manage-focus-with-cdk-focustrap)
-   - 14.4 [Meet WCAG Color Contrast Ratios](#144-meet-wcag-color-contrast-ratios)
-   - 14.5 [Respect prefers-reduced-motion](#145-respect-prefers-reduced-motion)
-   - 14.6 [Theming Patterns](#146-theming-patterns)
-   - 14.7 [Use ARIA Roles and Live Regions](#147-use-aria-roles-and-live-regions)
-15. [Data Handling](#15-data-handling) — **MEDIUM**
-   - 15.1 [Compose Mappers for Nested Data](#151-compose-mappers-for-nested-data)
-   - 15.2 [HTTP Client Patterns](#152-http-client-patterns)
-   - 15.3 [Use Generic Mapper for Paginated Responses](#153-use-generic-mapper-for-paginated-responses)
-   - 15.4 [Use Pure Mapper Functions for DTOs](#154-use-pure-mapper-functions-for-dtos)
+   - 5.3 [Use httpResource() for Signal-Based Data Fetching](#53-use-httpresource-for-signal-based-data-fetching)
+   - 5.4 [Use linkedSignal() for Dependent Resettable State](#54-use-linkedsignal-for-dependent-resettable-state)
+   - 5.5 [Use model() for Two-Way Binding](#55-use-model-for-two-way-binding)
+   - 5.6 [Use Optimistic Updates with Signals](#56-use-optimistic-updates-with-signals)
+   - 5.7 [Use resource() for Async Data Loading](#57-use-resource-for-async-data-loading)
+   - 5.8 [Use Signal Content Queries](#58-use-signal-content-queries)
+   - 5.9 [Use Signal Inputs](#59-use-signal-inputs)
+   - 5.10 [Use Signal View Queries](#510-use-signal-view-queries)
+   - 5.11 [Use Signals for Local State](#511-use-signals-for-local-state)
+   - 5.12 [Use toSignal for Observables](#512-use-tosignal-for-observables)
+6. [Component Patterns](#6-component-patterns) — **HIGH**
+   - 6.1 [Use Host Object for Element Bindings](#61-use-host-object-for-element-bindings)
+   - 6.2 [Use inject() Function for Dependencies](#62-use-inject-function-for-dependencies)
+7. [RxJS Patterns](#7-rxjs-patterns) — **HIGH**
+   - 7.1 [Always Unsubscribe from Observables](#71-always-unsubscribe-from-observables)
+   - 7.2 [Choose the Right Flattening Operator](#72-choose-the-right-flattening-operator)
+   - 7.3 [Handle Errors in Streams](#73-handle-errors-in-streams)
+   - 7.4 [Use combineLatest for Multiple Streams](#74-use-combinelatest-for-multiple-streams)
+   - 7.5 [Use DestroyRef and takeUntilDestroyed](#75-use-destroyref-and-takeuntildestroyed)
+   - 7.6 [Use shareReplay for Multicasting](#76-use-sharereplay-for-multicasting)
+   - 7.7 [Use switchMap for Cancellation](#77-use-switchmap-for-cancellation)
+8. [Change Detection](#8-change-detection) — **HIGH**
+   - 8.1 [Always Use trackBy in @for](#81-always-use-trackby-in-for)
+   - 8.2 [Prefer Async Pipe Over Subscribe](#82-prefer-async-pipe-over-subscribe)
+   - 8.3 [Prepare for Zoneless Angular](#83-prepare-for-zoneless-angular)
+   - 8.4 [Use OnPush Change Detection](#84-use-onpush-change-detection)
+9. [Template Optimization](#9-template-optimization) — **HIGH**
+   - 9.1 [Use NgOptimizedImage for Images](#91-use-ngoptimizedimage-for-images)
+   - 9.2 [Use Pure Pipes for Transforms](#92-use-pure-pipes-for-transforms)
+   - 9.3 [Use Virtual Scrolling for Large Lists](#93-use-virtual-scrolling-for-large-lists)
+10. [SSR & Hydration](#10-ssr-hydration) — **HIGH**
+   - 10.1 [Configure Server Route Render Modes](#101-configure-server-route-render-modes)
+   - 10.2 [Defer Browser-Only Components](#102-defer-browser-only-components)
+   - 10.3 [Enable Client Hydration](#103-enable-client-hydration)
+   - 10.4 [Fetch Data in Parallel on Server](#104-fetch-data-in-parallel-on-server)
+   - 10.5 [Run Non-Critical Work After Response](#105-run-non-critical-work-after-response)
+   - 10.6 [Set SEO Meta Tags for SSR Pages](#106-set-seo-meta-tags-for-ssr-pages)
+   - 10.7 [Use Incremental Hydration with @defer](#107-use-incremental-hydration-with-defer)
+   - 10.8 [Use LRU Cache for SSR Computations](#108-use-lru-cache-for-ssr-computations)
+   - 10.9 [Use Platform Checks for Browser APIs](#109-use-platform-checks-for-browser-apis)
+   - 10.10 [Use TransferState to Avoid Refetch](#1010-use-transferstate-to-avoid-refetch)
+11. [Forms](#11-forms) — **MEDIUM**
+   - 11.1 [Create Reusable Validators](#111-create-reusable-validators)
+   - 11.2 [Handle Form Submission Properly](#112-handle-form-submission-properly)
+   - 11.3 [Use ControlValueAccessor for Custom Controls](#113-use-controlvalueaccessor-for-custom-controls)
+   - 11.4 [Use ngx-formly for Dynamic Forms](#114-use-ngx-formly-for-dynamic-forms)
+   - 11.5 [Use Typed Reactive Forms](#115-use-typed-reactive-forms)
+12. [Architecture](#12-architecture) — **HIGH**
+   - 12.1 [Enforce Module Boundaries](#121-enforce-module-boundaries)
+   - 12.2 [Use Barrel Files for Public APIs](#122-use-barrel-files-for-public-apis)
+   - 12.3 [Use Domain-Driven Folder Structure](#123-use-domain-driven-folder-structure)
+13. [Testing](#13-testing) — **HIGH**
+   - 13.1 [Automate Accessibility Testing with axe-core](#131-automate-accessibility-testing-with-axe-core)
+   - 13.2 [Component Testing with Angular Testing Library](#132-component-testing-with-angular-testing-library)
+   - 13.3 [E2E Testing with Playwright](#133-e2e-testing-with-playwright)
+   - 13.4 [Mocking with ng-mocks and MSW](#134-mocking-with-ng-mocks-and-msw)
+   - 13.5 [Test Signals and Computed Values](#135-test-signals-and-computed-values)
+   - 13.6 [Unit Testing with Vitest](#136-unit-testing-with-vitest)
+   - 13.7 [Use CDK Component Test Harnesses](#137-use-cdk-component-test-harnesses)
+   - 13.8 [Use Object Mothers for Test Data](#138-use-object-mothers-for-test-data)
+14. [Infrastructure](#14-infrastructure) — **MEDIUM**
+   - 14.1 [Enable Scroll Position Restoration](#141-enable-scroll-position-restoration)
+   - 14.2 [Error Handling Patterns](#142-error-handling-patterns)
+   - 14.3 [Lazy Load Routes and Components](#143-lazy-load-routes-and-components)
+   - 14.4 [Observability Patterns](#144-observability-patterns)
+   - 14.5 [Schema-Validate LocalStorage Data](#145-schema-validate-localstorage-data)
+   - 14.6 [Security Patterns](#146-security-patterns)
+   - 14.7 [Use CanDeactivate Guard for Unsaved Changes](#147-use-candeactivate-guard-for-unsaved-changes)
+   - 14.8 [Use Custom Preloading Strategy](#148-use-custom-preloading-strategy)
+   - 14.9 [Use Event Delegation for Lists](#149-use-event-delegation-for-lists)
+   - 14.10 [Use Factory Providers for Complex Setup](#1410-use-factory-providers-for-complex-setup)
+   - 14.11 [Use Functional Route Guards](#1411-use-functional-route-guards)
+   - 14.12 [Use Functional Route Resolvers](#1412-use-functional-route-resolvers)
+   - 14.13 [Use InjectionToken with Factory for Config](#1413-use-injectiontoken-with-factory-for-config)
+   - 14.14 [Use provideAppInitializer for Startup Logic](#1414-use-provideappinitializer-for-startup-logic)
+   - 14.15 [Use providedIn root for Tree-Shakeable Services](#1415-use-providedin-root-for-tree-shakeable-services)
+   - 14.16 [Use Route Input Binding](#1416-use-route-input-binding)
+15. [UI & Accessibility](#15-ui-accessibility) — **MEDIUM**
+   - 15.1 [Ensure Keyboard Navigation](#151-ensure-keyboard-navigation)
+   - 15.2 [Loading State Patterns](#152-loading-state-patterns)
+   - 15.3 [Manage Focus with CDK FocusTrap](#153-manage-focus-with-cdk-focustrap)
+   - 15.4 [Meet WCAG Color Contrast Ratios](#154-meet-wcag-color-contrast-ratios)
+   - 15.5 [Respect prefers-reduced-motion](#155-respect-prefers-reduced-motion)
+   - 15.6 [Theming Patterns](#156-theming-patterns)
+   - 15.7 [Use ARIA Roles and Live Regions](#157-use-aria-roles-and-live-regions)
+16. [Data Handling](#16-data-handling) — **MEDIUM**
+   - 16.1 [Compose Mappers for Nested Data](#161-compose-mappers-for-nested-data)
+   - 16.2 [HTTP Client Patterns](#162-http-client-patterns)
+   - 16.3 [Use Functional HTTP Interceptors](#163-use-functional-http-interceptors)
+   - 16.4 [Use Generic Mapper for Paginated Responses](#164-use-generic-mapper-for-paginated-responses)
+   - 16.5 [Use Pure Mapper Functions for DTOs](#165-use-pure-mapper-functions-for-dtos)
 
 ---
 
@@ -633,19 +658,178 @@ Use `computed()` instead of getters for derived state. Getters re-run on every c
 fullName = computed(() => `${this.firstName()} ${this.lastName()}`);
 ```
 
-### 5.3 Use Signal Inputs
+### 5.3 Use httpResource() for Signal-Based Data Fetching
+
+**Impact: HIGH** (Reactive GET with auto-refetch)
+
+Use `httpResource()` for reactive GET requests that auto-refetch when signal dependencies change, replacing manual HttpClient subscribe patterns.
+
+**Incorrect:**
+
+```typescript
+loading = signal(false);
+data = signal<User | null>(null);
+ngOnInit() {
+  this.loading.set(true);
+  this.http.get<User>(`/api/users/${this.userId()}`).subscribe(u => { this.data.set(u); this.loading.set(false); });
+}
+```
+
+**Correct:**
+
+```typescript
+userId = input.required<string>();
+user = httpResource<User>(() => `/api/users/${this.userId()}`);
+// Access: user.value(), user.isLoading(), user.error()
+```
+
+### 5.4 Use linkedSignal() for Dependent Resettable State
+
+**Impact: HIGH** (Auto-resets derived state)
+
+Use `linkedSignal()` when a writable signal's value should reset automatically when a source signal changes.
+
+**Incorrect:**
+
+```typescript
+options = signal(['Ground', 'Air', 'Sea']);
+selected = signal(this.options()[0]);
+constructor() { effect(() => this.selected.set(this.options()[0])); }
+```
+
+**Correct:**
+
+```typescript
+options = signal(['Ground', 'Air', 'Sea']);
+selected = linkedSignal(() => this.options()[0]);
+// Writable: selected.set('Air') — auto-resets when options change
+```
+
+### 5.5 Use model() for Two-Way Binding
+
+**Impact: HIGH** (Simplified two-way binding)
+
+Use `model()` instead of input+output pairs when parent and child need synchronized state via `[(value)]` syntax.
+
+**Incorrect:**
+
+```typescript
+@Input() value = 0;
+@Output() valueChange = new EventEmitter<number>();
+update(v: number) { this.value = v; this.valueChange.emit(v); }
+```
+
+**Correct:**
+
+```typescript
+value = model<number>(0);
+update(v: number) { this.value.set(v); }
+// Parent: <my-comp [(value)]="count" />
+```
+
+### 5.6 Use Optimistic Updates with Signals
+
+**Impact: MEDIUM** (Instant UI feedback)
+
+Update signal state immediately before API calls and rollback on error to provide instant UI feedback.
+
+**Incorrect:**
+
+```typescript
+async delete(id: string) {
+  await firstValueFrom(this.http.delete(`/api/items/${id}`));
+  this.items.update(items => items.filter(i => i.id !== id));
+}
+```
+
+**Correct:**
+
+```typescript
+delete(id: string) {
+  const prev = this.items();
+  this.items.update(items => items.filter(i => i.id !== id));
+  this.http.delete(`/api/items/${id}`).subscribe({ error: () => this.items.set(prev) });
+}
+```
+
+### 5.7 Use resource() for Async Data Loading
+
+**Impact: HIGH** (Built-in loading/error/cancellation)
+
+Use the `resource()` API for generic async operations with built-in loading, error, and cancellation state via `ResourceRef`.
+
+**Incorrect:**
+
+```typescript
+data = signal<User | undefined>(undefined);
+loading = signal(false);
+error = signal<Error | null>(null);
+loadUser() { this.loading.set(true); fetch(`/api/users/${this.id()}`).then(r => r.json()).then(d => this.data.set(d)).finally(() => this.loading.set(false)); }
+```
+
+**Correct:**
+
+```typescript
+userResource = resource({
+  params: () => ({ id: this.userId() }),
+  loader: ({ params }) => fetch(`/api/users/${params.id}`).then(r => r.json()),
+});
+// Access: userResource.value(), userResource.isLoading(), userResource.error()
+```
+
+### 5.8 Use Signal Content Queries
+
+**Impact: HIGH** (Reactive, no lifecycle hooks)
+
+Use `contentChild()` and `contentChildren()` signal-based queries instead of `@ContentChild` and `@ContentChildren` decorators.
+
+**Incorrect:**
+
+```typescript
+@ContentChild(TemplateRef) template!: TemplateRef<unknown>;
+ngAfterContentInit() { this.renderTemplate(this.template); }
+```
+
+**Correct:**
+
+```typescript
+template = contentChild.required(TemplateRef);
+// Reactive: use template() in computed() or effect(), no lifecycle hooks needed
+```
+
+### 5.9 Use Signal Inputs
 
 **Impact: HIGH** (Type-safe, works with computed)
 
 Use `input.required<T>()` and `input<T>(defaultValue)` instead of `@Input()` decorators. Signal inputs are more type-safe and work seamlessly with `computed()` for derived state.
 
-### 5.4 Use Signals for Local State
+### 5.10 Use Signal View Queries
+
+**Impact: HIGH** (Reactive, no lifecycle hooks)
+
+Use `viewChild()` and `viewChildren()` signal-based queries instead of `@ViewChild` and `@ViewChildren` decorators.
+
+**Incorrect:**
+
+```typescript
+@ViewChild('chart') chart!: ElementRef;
+ngAfterViewInit() { this.initChart(this.chart.nativeElement); }
+```
+
+**Correct:**
+
+```typescript
+chart = viewChild.required<ElementRef>('chart');
+// Reactive: use chart() in computed() or effect(), no lifecycle hooks needed
+```
+
+### 5.11 Use Signals for Local State
 
 **Impact: HIGH** (Fine-grained reactivity, zoneless-ready)
 
 Use `signal<T>(initialValue)` instead of plain class properties for component state. Signals provide fine-grained reactivity and enable zoneless change detection. Update with `.set()`, `.update()`, or `.mutate()`.
 
-### 5.5 Use toSignal for Observables
+### 5.12 Use toSignal for Observables
 
 **Impact: MEDIUM** (Cleaner templates, zoneless-ready)
 
@@ -660,11 +844,63 @@ params = toSignal(this.route.params);
 
 ---
 
-## 6. RxJS Patterns
+## 6. Component Patterns
+
+**Impact: HIGH** (Component architecture)
+
+### 6.1 Use Host Object for Element Bindings
+
+**Impact: HIGH** (Centralizes host interactions)
+
+Use the `host` property in `@Component`/`@Directive` instead of `@HostBinding` and `@HostListener` decorators for centralized, declarative host element interactions.
+
+**Incorrect:**
+
+```typescript
+@HostBinding('class.active') isActive = false;
+@HostListener('click') onClick() { this.isActive = true; }
+```
+
+**Correct:**
+
+```typescript
+@Component({
+  host: { '[class.active]': 'isActive()', '(click)': 'activate()' }
+})
+```
+
+### 6.2 Use inject() Function for Dependencies
+
+**Impact: HIGH** (Cleaner DI, works in functions)
+
+Prefer the `inject()` function over constructor injection for cleaner syntax, better type inference, and compatibility with functional guards/interceptors.
+
+**Incorrect:**
+
+```typescript
+@Component({ selector: 'app-user' })
+export class UserComponent {
+  constructor(private userService: UserService, private router: Router) {}
+}
+```
+
+**Correct:**
+
+```typescript
+@Component({ selector: 'app-user' })
+export class UserComponent {
+  private userService = inject(UserService);
+  private router = inject(Router);
+}
+```
+
+---
+
+## 7. RxJS Patterns
 
 **Impact: HIGH** (Memory leaks & cancellation)
 
-### 6.1 Always Unsubscribe from Observables
+### 7.1 Always Unsubscribe from Observables
 
 **Impact: HIGH** (Prevents memory leaks)
 
@@ -678,7 +914,21 @@ data = toSignal(this.data$); // Auto-unsubscribes
 this.data$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
 ```
 
-### 6.2 Handle Errors in Streams
+### 7.2 Choose the Right Flattening Operator
+
+**Impact: HIGH** (Prevents race conditions)
+
+Use `switchMap` to cancel previous (search/autocomplete), `exhaustMap` to ignore new (form submit), `concatMap` for ordered sequential, `mergeMap` for parallel — choosing wrong causes race conditions or lost requests.
+
+**Correct:**
+
+```typescript
+search$ = this.query$.pipe(switchMap(q => this.api.search(q)));       // Cancel previous
+submit$ = this.click$.pipe(exhaustMap(() => this.api.save(this.form))); // Ignore while busy
+ordered$ = this.ids$.pipe(concatMap(id => this.api.process(id)));      // Preserve order
+```
+
+### 7.3 Handle Errors in Streams
 
 **Impact: HIGH** (Prevents stream termination)
 
@@ -704,7 +954,7 @@ search$ = this.term$.pipe(
 );
 ```
 
-### 6.3 Use combineLatest for Multiple Streams
+### 7.4 Use combineLatest for Multiple Streams
 
 **Impact: MEDIUM** (Combines dependent data)
 
@@ -720,7 +970,29 @@ vm$ = combineLatest({
 });
 ```
 
-### 6.4 Use shareReplay for Multicasting
+### 7.5 Use DestroyRef and takeUntilDestroyed
+
+**Impact: HIGH** (No manual unsubscribe logic)
+
+Use `takeUntilDestroyed()` in injection context and `DestroyRef.onDestroy()` for cleanup instead of implementing `OnDestroy` with a Subject.
+
+**Incorrect:**
+
+```typescript
+private destroy$ = new Subject<void>();
+ngOnInit() { this.data$.pipe(takeUntil(this.destroy$)).subscribe(); }
+ngOnDestroy() { this.destroy$.next(); this.destroy$.complete(); }
+```
+
+**Correct:**
+
+```typescript
+private destroyRef = inject(DestroyRef);
+ngOnInit() { this.data$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(); }
+// Outside injection context: pass DestroyRef explicitly
+```
+
+### 7.6 Use shareReplay for Multicasting
 
 **Impact: MEDIUM** (Avoids duplicate HTTP calls)
 
@@ -734,7 +1006,7 @@ users$ = this.http.get<User[]>('/api/users').pipe(
 );
 ```
 
-### 6.5 Use switchMap for Cancellation
+### 7.7 Use switchMap for Cancellation
 
 **Impact: MEDIUM** (Cancels stale requests)
 
@@ -752,29 +1024,29 @@ search$ = this.searchTerm$.pipe(
 
 ---
 
-## 7. Change Detection
+## 8. Change Detection
 
 **Impact: HIGH** (Rendering performance)
 
-### 7.1 Always Use trackBy in @for
+### 8.1 Always Use trackBy in @for
 
 **Impact: HIGH** (Prevents unnecessary DOM recreation)
 
 Use `track item.id` (unique identifier) instead of `track $index` in `@for` loops. Tracking by index causes the entire list to re-render on any change; tracking by ID allows Angular to reuse existing DOM elements.
 
-### 7.2 Prefer Async Pipe Over Subscribe
+### 8.2 Prefer Async Pipe Over Subscribe
 
 **Impact: MEDIUM** (Auto-unsubscribes, triggers CD)
 
 Use `| async` pipe in templates instead of manual `.subscribe()` calls. The async pipe automatically unsubscribes on component destroy and triggers change detection when new values arrive.
 
-### 7.3 Prepare for Zoneless Angular
+### 8.3 Prepare for Zoneless Angular
 
 **Impact: MEDIUM** (Future-proofs for zoneless)
 
 Use Signals (`signal()`, `computed()`) for state instead of plain properties. Signal-based reactivity works with or without Zone.js, preparing your app for zoneless Angular and explicit change detection.
 
-### 7.4 Use OnPush Change Detection
+### 8.4 Use OnPush Change Detection
 
 **Impact: HIGH** (Reduces change detection cycles)
 
@@ -782,11 +1054,29 @@ Set `changeDetection: ChangeDetectionStrategy.OnPush` on components so Angular o
 
 ---
 
-## 8. Template Optimization
+## 9. Template Optimization
 
 **Impact: HIGH** (Lazy loading & pipes)
 
-### 8.1 Use Pure Pipes for Transforms
+### 9.1 Use NgOptimizedImage for Images
+
+**Impact: HIGH** (Optimizes LCP & Core Web Vitals)
+
+Use the `NgOptimizedImage` directive (`ngSrc`) with `priority` for above-fold images to enable automatic lazy loading, srcset generation, and preconnect hints.
+
+**Incorrect:**
+
+```html
+<img src="/assets/hero.png" alt="Hero">
+```
+
+**Correct:**
+
+```html
+<img ngSrc="/assets/hero.png" width="800" height="400" priority alt="Hero">
+```
+
+### 9.2 Use Pure Pipes for Transforms
 
 **Impact: MEDIUM** (Memoized, only recalculates on input change)
 
@@ -808,19 +1098,65 @@ Use pure pipes instead of method calls in templates for memoized transformations
 <span>{{ user.name | initials }}</span>
 ```
 
+### 9.3 Use Virtual Scrolling for Large Lists
+
+**Impact: HIGH** (Renders only visible items)
+
+Use `CdkVirtualScrollViewport` with `*cdkVirtualFor` to render only visible items in long lists, reducing DOM nodes from thousands to ~20.
+
+**Incorrect:**
+
+```html
+@for (item of items; track item.id) {
+  <div>{{ item.name }}</div>
+}
+```
+
+**Correct:**
+
+```html
+<cdk-virtual-scroll-viewport itemSize="48">
+  <div *cdkVirtualFor="let item of items">{{ item.name }}</div>
+</cdk-virtual-scroll-viewport>
+```
+
 ---
 
-## 9. SSR & Hydration
+## 10. SSR & Hydration
 
 **Impact: HIGH** (Initial render & SEO)
 
-### 9.1 Defer Browser-Only Components
+### 10.1 Configure Server Route Render Modes
+
+**Impact: HIGH** (Per-route rendering strategy)
+
+Use `ServerRoute` with `RenderMode.Prerender`, `RenderMode.Server`, or `RenderMode.Client` to control rendering strategy per route.
+
+**Incorrect:**
+
+```typescript
+const serverRoutes: ServerRoute[] = [
+  { path: '**', renderMode: RenderMode.Server }
+];
+```
+
+**Correct:**
+
+```typescript
+const serverRoutes: ServerRoute[] = [
+  { path: '', renderMode: RenderMode.Prerender },
+  { path: 'dashboard', renderMode: RenderMode.Client },
+  { path: '**', renderMode: RenderMode.Server }
+];
+```
+
+### 10.2 Defer Browser-Only Components
 
 **Impact: MEDIUM** (Avoids SSR hydration mismatches)
 
 Use `@defer (on idle)` with a `@placeholder` for components that use browser APIs (canvas, charts, maps). This avoids hydration mismatches by deferring the component until after hydration completes on the client.
 
-### 9.2 Enable Client Hydration
+### 10.3 Enable Client Hydration
 
 **Impact: HIGH** (Preserves server-rendered DOM)
 
@@ -837,7 +1173,7 @@ bootstrapApplication(AppComponent, {
 });
 ```
 
-### 9.3 Fetch Data in Parallel on Server
+### 10.4 Fetch Data in Parallel on Server
 
 **Impact: HIGH** (Reduces SSR response time by parallelization)
 
@@ -855,7 +1191,7 @@ async resolve() {
 }
 ```
 
-### 9.4 Run Non-Critical Work After Response
+### 10.5 Run Non-Critical Work After Response
 
 **Impact: MEDIUM** (Faster Time to First Byte)
 
@@ -873,7 +1209,55 @@ async handleRequest(req: Request) {
 }
 ```
 
-### 9.5 Use LRU Cache for SSR Computations
+### 10.6 Set SEO Meta Tags for SSR Pages
+
+**Impact: MEDIUM** (Improves search indexing)
+
+Use Angular's `Meta` and `Title` services to set Open Graph, Twitter Card, and canonical URL meta tags for server-rendered pages.
+
+**Incorrect:**
+
+```typescript
+export class ProductPage {
+  product = input.required<Product>();
+}
+```
+
+**Correct:**
+
+```typescript
+#meta = inject(Meta);
+#title = inject(Title);
+product = input.required<Product>();
+constructor() {
+  effect(() => this.#title.setTitle(this.product().name));
+}
+```
+
+### 10.7 Use Incremental Hydration with @defer
+
+**Impact: HIGH** (Reduces hydration cost)
+
+Enable `provideClientHydration(withIncrementalHydration())` and use `@defer (hydrate on ...)` triggers to hydrate components progressively instead of all at once.
+
+**Incorrect:**
+
+```html
+<hero-banner />
+<comments-section />
+<footer-widgets />
+```
+
+**Correct:**
+
+```html
+<hero-banner />
+@defer (hydrate on viewport) {
+  <comments-section />
+}
+```
+
+### 10.8 Use LRU Cache for SSR Computations
 
 **Impact: HIGH** (Reduces server response time 50-90%)
 
@@ -892,13 +1276,13 @@ async renderPage(id: string) {
 }
 ```
 
-### 9.6 Use Platform Checks for Browser APIs
+### 10.9 Use Platform Checks for Browser APIs
 
 **Impact: MEDIUM** (Prevents SSR errors)
 
 Use `isPlatformBrowser(inject(PLATFORM_ID))` before accessing browser-only APIs like `window`, `document`, or `localStorage`. These APIs don't exist during server-side rendering and will throw errors.
 
-### 9.7 Use TransferState to Avoid Refetch
+### 10.10 Use TransferState to Avoid Refetch
 
 **Impact: HIGH** (Eliminates duplicate API calls)
 
@@ -916,11 +1300,11 @@ data = this.transferState.hasKey(DATA_KEY)
 
 ---
 
-## 10. Forms
+## 11. Forms
 
 **Impact: MEDIUM** (Form handling)
 
-### 10.1 Create Reusable Validators
+### 11.1 Create Reusable Validators
 
 **Impact: MEDIUM** (DRY validation, consistent error handling)
 
@@ -935,7 +1319,7 @@ export const emailValidator: ValidatorFn = (control) =>
 // Usage: email: ['', [Validators.required, emailValidator]]
 ```
 
-### 10.2 Handle Form Submission Properly
+### 11.2 Handle Form Submission Properly
 
 **Impact: MEDIUM** (Better UX, proper error handling)
 
@@ -952,7 +1336,7 @@ async onSubmit() {
 }
 ```
 
-### 10.3 Use ControlValueAccessor for Custom Controls
+### 11.3 Use ControlValueAccessor for Custom Controls
 
 **Impact: MEDIUM** (Form integration, reusable custom inputs)
 
@@ -967,7 +1351,7 @@ export class RatingComponent implements ControlValueAccessor {
 }
 ```
 
-### 10.4 Use ngx-formly for Dynamic Forms
+### 11.4 Use ngx-formly for Dynamic Forms
 
 **Impact: MEDIUM** (Reduces form boilerplate by 60-80%)
 
@@ -989,7 +1373,7 @@ fields: FormlyFieldConfig[] = [
 ];
 ```
 
-### 10.5 Use Typed Reactive Forms
+### 11.5 Use Typed Reactive Forms
 
 **Impact: HIGH** (Type-safe forms, better autocomplete)
 
@@ -997,11 +1381,11 @@ Use `FormBuilder.nonNullable.group()` to create typed form groups with non-nulla
 
 ---
 
-## 11. Architecture
+## 12. Architecture
 
 **Impact: HIGH** (Scalability)
 
-### 11.1 Enforce Module Boundaries
+### 12.1 Enforce Module Boundaries
 
 **Impact: HIGH** (Prevents spaghetti dependencies)
 
@@ -1024,7 +1408,7 @@ import { formatCurrency } from '@app/shared/util';
 
 Use Sheriff for standalone projects, Nx for monorepos.
 
-### 11.2 Use Barrel Files for Public APIs
+### 12.2 Use Barrel Files for Public APIs
 
 **Impact: MEDIUM** (Clear public contracts, encapsulation)
 
@@ -1038,7 +1422,7 @@ export { Customer } from './model/customer.model';
 export { CustomerService } from './data/customer.service';
 ```
 
-### 11.3 Use Domain-Driven Folder Structure
+### 12.3 Use Domain-Driven Folder Structure
 
 **Impact: MEDIUM** (Better organization, clear boundaries)
 
@@ -1056,11 +1440,11 @@ src/app/domains/
 
 ---
 
-## 12. Testing
+## 13. Testing
 
 **Impact: HIGH** (Reliability)
 
-### 12.1 Automate Accessibility Testing with axe-core
+### 13.1 Automate Accessibility Testing with axe-core
 
 **Impact: HIGH** (Catches WCAG violations automatically)
 
@@ -1083,7 +1467,7 @@ it('should have no a11y violations', async () => {
 });
 ```
 
-### 12.2 Component Testing with Angular Testing Library
+### 13.2 Component Testing with Angular Testing Library
 
 **Impact: HIGH** (user-centric, reliable component tests)
 
@@ -1099,7 +1483,7 @@ it('should increment count', async () => {
 });
 ```
 
-### 12.3 E2E Testing with Playwright
+### 13.3 E2E Testing with Playwright
 
 **Impact: MEDIUM** (reliable end-to-end user journey tests)
 
@@ -1116,7 +1500,7 @@ test('user can login', async ({ page }) => {
 });
 ```
 
-### 12.4 Mocking with ng-mocks and MSW
+### 13.4 Mocking with ng-mocks and MSW
 
 **Impact: MEDIUM** (Isolated, reliable tests)
 
@@ -1131,7 +1515,7 @@ TestBed.configureTestingModule({
 });
 ```
 
-### 12.5 Test Signals and Computed Values
+### 13.5 Test Signals and Computed Values
 
 **Impact: HIGH** (Verifies reactive state logic)
 
@@ -1152,7 +1536,7 @@ expect(component.doubled()).toBe(10);
 TestBed.flushEffects(); // Flush pending effects if needed
 ```
 
-### 12.6 Unit Testing with Vitest
+### 13.6 Unit Testing with Vitest
 
 **Impact: HIGH** (Fast, reliable tests for services and logic)
 
@@ -1168,7 +1552,7 @@ it('should fetch users', async () => {
 });
 ```
 
-### 12.7 Use CDK Component Test Harnesses
+### 13.7 Use CDK Component Test Harnesses
 
 **Impact: HIGH** (Stable tests decoupled from DOM structure)
 
@@ -1189,7 +1573,7 @@ const button = await loader.getHarness(MatButtonHarness.with({ text: 'Save' }));
 await button.click();
 ```
 
-### 12.8 Use Object Mothers for Test Data
+### 13.8 Use Object Mothers for Test Data
 
 **Impact: MEDIUM** (Consistent, maintainable test fixtures)
 
@@ -1212,11 +1596,32 @@ export const createUser = (overrides: Partial<User> = {}): User => ({
 
 ---
 
-## 13. Infrastructure
+## 14. Infrastructure
 
 **Impact: MEDIUM** (Cross-cutting concerns)
 
-### 13.1 Error Handling Patterns
+### 14.1 Enable Scroll Position Restoration
+
+**Impact: MEDIUM** (Better navigation UX)
+
+Use `withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })` to automatically restore scroll positions when navigating back.
+
+**Incorrect:**
+
+```typescript
+// Manually scrolling to top on every navigation — loses back-button position
+router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => window.scrollTo(0, 0));
+```
+
+**Correct:**
+
+```typescript
+provideRouter(routes,
+  withInMemoryScrolling({ scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' }),
+)
+```
+
+### 14.2 Error Handling Patterns
 
 **Impact: MEDIUM** (Resilience and user feedback)
 
@@ -1232,13 +1637,13 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) =>
   }));
 ```
 
-### 13.2 Lazy Load Routes and Components
+### 14.3 Lazy Load Routes and Components
 
 **Impact: HIGH** (Reduces initial bundle size)
 
 Use `loadComponent: () => import('./component').then(m => m.Component)` and `loadChildren: () => import('./routes').then(m => m.routes)` instead of direct component imports. Lazy loading reduces initial bundle size by loading code only when routes are visited.
 
-### 13.3 Observability Patterns
+### 14.4 Observability Patterns
 
 **Impact: MEDIUM** (Faster debugging)
 
@@ -1251,7 +1656,7 @@ logger.info('User created', { userId: user.id, role: user.role });
 onLCP(metric => logger.info('LCP', metric));
 ```
 
-### 13.4 Schema-Validate LocalStorage Data
+### 14.5 Schema-Validate LocalStorage Data
 
 **Impact: MEDIUM** (Prevents runtime errors from corrupted storage)
 
@@ -1264,7 +1669,7 @@ const result = StorageSchema.safeParse(JSON.parse(localStorage.getItem('user') ?
 const user = result.success ? result.data.user : migrateOrDefault(result); // fallback on failure
 ```
 
-### 13.5 Security Patterns
+### 14.6 Security Patterns
 
 **Impact: HIGH** (Prevents vulnerabilities)
 
@@ -1283,7 +1688,51 @@ private accessToken = signal<string | null>(null); // In-memory only
 provideHttpClient(withXsrfConfiguration({ cookieName: 'XSRF-TOKEN', headerName: 'X-XSRF-TOKEN' }));
 ```
 
-### 13.6 Use Event Delegation for Lists
+### 14.7 Use CanDeactivate Guard for Unsaved Changes
+
+**Impact: MEDIUM** (Prevents accidental data loss)
+
+Implement `CanDeactivateFn` to warn users before navigating away from forms with unsaved data.
+
+**Incorrect:**
+
+```typescript
+// No guard — user navigates away and loses unsaved changes
+{ path: 'edit/:id', component: EditComponent }
+```
+
+**Correct:**
+
+```typescript
+export const unsavedChangesGuard: CanDeactivateFn<{ hasUnsavedChanges(): boolean }> =
+  (component) => component.hasUnsavedChanges() ? confirm('Discard changes?') : true;
+// Usage: { path: 'edit/:id', canDeactivate: [unsavedChangesGuard] }
+```
+
+### 14.8 Use Custom Preloading Strategy
+
+**Impact: MEDIUM** (Selective route preloading)
+
+Implement a selective preloading strategy instead of `PreloadAllModules` to control which lazy routes are preloaded based on route data flags.
+
+**Incorrect:**
+
+```typescript
+// Preloads every lazy route — wastes bandwidth on rarely visited routes
+provideRouter(routes, withPreloading(PreloadAllModules))
+```
+
+**Correct:**
+
+```typescript
+export class SelectivePreload extends PreloadingStrategy {
+  preload = (route: Route, load: () => Observable<any>) =>
+    route.data?.['preload'] ? load() : of(null);
+}
+// Route: { path: 'dashboard', loadComponent: ..., data: { preload: true } }
+```
+
+### 14.9 Use Event Delegation for Lists
 
 **Impact: MEDIUM** (Reduces memory from O(n) to O(1) listeners)
 
@@ -1300,7 +1749,33 @@ Attach one event listener to a parent instead of listeners on each child. Use `d
 <!-- One listener handles all clicks via event.target -->
 ```
 
-### 13.7 Use Functional Route Guards
+### 14.10 Use Factory Providers for Complex Setup
+
+**Impact: MEDIUM** (Conditional service creation)
+
+Use `useFactory` with `inject()` for conditional service creation based on environment or runtime dependencies.
+
+**Incorrect:**
+
+```typescript
+// Conditional logic in service constructor couples to environment
+@Injectable({ providedIn: 'root' })
+export class LogService {
+  constructor() { if (environment.production) { /* ... */ } }
+}
+```
+
+**Correct:**
+
+```typescript
+{ provide: LogService, useFactory: () => {
+    const env = inject(ENVIRONMENT);
+    return env.production ? new ProdLogService() : new DevLogService();
+  },
+}
+```
+
+### 14.11 Use Functional Route Guards
 
 **Impact: HIGH** (Protects routes, cleaner than class guards)
 
@@ -1317,7 +1792,7 @@ export const authGuard: CanActivateFn = () => {
 // Usage: { path: 'dashboard', canActivate: [authGuard] }
 ```
 
-### 13.8 Use Functional Route Resolvers
+### 14.12 Use Functional Route Resolvers
 
 **Impact: MEDIUM** (Preloads data before navigation)
 
@@ -1330,7 +1805,78 @@ export const userResolver: ResolveFn<User | null> = (route) =>
   inject(UserService).getById(route.paramMap.get('id')!).pipe(catchError(() => of(null)));
 ```
 
-### 13.9 Use Route Input Binding
+### 14.13 Use InjectionToken with Factory for Config
+
+**Impact: MEDIUM** (Type-safe, tree-shakeable config)
+
+Create self-providing `InjectionToken` instances with `factory` for browser globals and app configuration instead of string tokens or direct global access.
+
+**Incorrect:**
+
+```typescript
+// String tokens lose type safety and aren't tree-shakeable
+constructor(@Inject('API_URL') private apiUrl: string) {}
+const el = window.document.getElementById('app');
+```
+
+**Correct:**
+
+```typescript
+export const API_URL = new InjectionToken<string>('API_URL', {
+  factory: () => environment.apiUrl,
+});
+// Usage: private apiUrl = inject(API_URL);
+```
+
+### 14.14 Use provideAppInitializer for Startup Logic
+
+**Impact: MEDIUM** (Blocks bootstrap until ready)
+
+Use `provideAppInitializer()` to run async setup code (config loading, auth checks) before the app renders.
+
+**Incorrect:**
+
+```typescript
+// Startup logic in root component — app renders before init completes
+export class AppComponent {
+  constructor(private config: ConfigService) { config.load(); }
+}
+```
+
+**Correct:**
+
+```typescript
+// App providers — blocks rendering until init resolves
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideAppInitializer(() => inject(ConfigService).load()),
+  ],
+};
+```
+
+### 14.15 Use providedIn root for Tree-Shakeable Services
+
+**Impact: MEDIUM** (Auto tree-shaking of unused services)
+
+Provide services with `providedIn: 'root'` to enable automatic tree-shaking of unused services instead of listing them in module or component `providers` arrays.
+
+**Incorrect:**
+
+```typescript
+@Injectable()
+export class UserService { /* ... */ }
+// Must manually add to providers: [UserService] — not tree-shakeable
+```
+
+**Correct:**
+
+```typescript
+@Injectable({ providedIn: 'root' })
+export class UserService { /* ... */ }
+// Automatically provided and tree-shaken if unused
+```
+
+### 14.16 Use Route Input Binding
 
 **Impact: MEDIUM** (Cleaner component code, no ActivatedRoute)
 
@@ -1338,11 +1884,11 @@ Enable `withComponentInputBinding()` in router config to bind route params, quer
 
 ---
 
-## 14. UI & Accessibility
+## 15. UI & Accessibility
 
 **Impact: MEDIUM** (User experience)
 
-### 14.1 Ensure Keyboard Navigation
+### 15.1 Ensure Keyboard Navigation
 
 **Impact: MEDIUM** (Keyboard-only user access)
 
@@ -1362,7 +1908,7 @@ All interactive elements must be keyboard-accessible. Use native `<button>` and 
 </button>
 ```
 
-### 14.2 Loading State Patterns
+### 15.2 Loading State Patterns
 
 **Impact: MEDIUM** (Perceived performance and UX)
 
@@ -1382,7 +1928,7 @@ Use skeleton loaders matching content shape to prevent CLS. Disable buttons duri
 }
 ```
 
-### 14.3 Manage Focus with CDK FocusTrap
+### 15.3 Manage Focus with CDK FocusTrap
 
 **Impact: MEDIUM** (Accessible modals and overlays)
 
@@ -1406,7 +1952,7 @@ Use `cdkTrapFocus` for dialogs and overlays to prevent focus from escaping. Rest
 </div>
 ```
 
-### 14.4 Meet WCAG Color Contrast Ratios
+### 15.4 Meet WCAG Color Contrast Ratios
 
 **Impact: MEDIUM** (Readability for low-vision users)
 
@@ -1424,7 +1970,7 @@ Text must meet WCAG AA contrast ratios: 4.5:1 for normal text, 3:1 for large tex
 .label { color: #595959; background: #fff; } /* 7:1 ratio — passes AA */
 ```
 
-### 14.5 Respect prefers-reduced-motion
+### 15.5 Respect prefers-reduced-motion
 
 **Impact: MEDIUM** (Prevents motion sickness triggers)
 
@@ -1445,7 +1991,7 @@ Disable or simplify animations for users who prefer reduced motion. Use the `pre
 }
 ```
 
-### 14.6 Theming Patterns
+### 15.6 Theming Patterns
 
 **Impact: MEDIUM** (Consistent design and dark mode)
 
@@ -1464,7 +2010,7 @@ Define theme values as CSS custom properties (`--border-color`). Support dark mo
 isMobile = toSignal(this.breakpointObserver.observe('(max-width: 768px)').pipe(map(r => r.matches)));
 ```
 
-### 14.7 Use ARIA Roles and Live Regions
+### 15.7 Use ARIA Roles and Live Regions
 
 **Impact: MEDIUM** (Screen reader compatibility)
 
@@ -1489,11 +2035,11 @@ this.liveAnnouncer.announce('Item saved successfully');
 
 ---
 
-## 15. Data Handling
+## 16. Data Handling
 
 **Impact: MEDIUM** (API integration)
 
-### 15.1 Compose Mappers for Nested Data
+### 16.1 Compose Mappers for Nested Data
 
 **Impact: MEDIUM** (Reusable, maintains single responsibility)
 
@@ -1513,7 +2059,7 @@ const mapOrder = (dto: OrderDto): Order => ({
 });
 ```
 
-### 15.2 HTTP Client Patterns
+### 16.2 HTTP Client Patterns
 
 **Impact: HIGH** (Secure and efficient data fetching)
 
@@ -1530,7 +2076,33 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 // Skip interceptor: http.get('/api', { context: new HttpContext().set(SKIP_AUTH, true) })
 ```
 
-### 15.3 Use Generic Mapper for Paginated Responses
+### 16.3 Use Functional HTTP Interceptors
+
+**Impact: HIGH** (Simpler, composable request handling)
+
+Write interceptors as `HttpInterceptorFn` functions and register with `withInterceptors()` instead of class-based `HTTP_INTERCEPTORS`.
+
+**Incorrect:**
+
+```typescript
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+  intercept(req: HttpRequest<any>, next: HttpHandler) { /* ... */ }
+}
+// { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+```
+
+**Correct:**
+
+```typescript
+export const authInterceptor: HttpInterceptorFn = (req, next) => {
+  const token = inject(AuthService).getToken();
+  return next(req.clone({ setHeaders: { Authorization: `Bearer ${token}` } }));
+};
+// provideHttpClient(withInterceptors([authInterceptor]))
+```
+
+### 16.4 Use Generic Mapper for Paginated Responses
 
 **Impact: LOW** (Reusable pagination handling)
 
@@ -1548,7 +2120,7 @@ function mapPaginated<TDto, T>(dto: PaginatedDto<TDto>, mapper: (d: TDto) => T):
 // Usage: map(dto => mapPaginated(dto, mapUserDto))
 ```
 
-### 15.4 Use Pure Mapper Functions for DTOs
+### 16.5 Use Pure Mapper Functions for DTOs
 
 **Impact: MEDIUM** (Decouples frontend from API, type-safe transforms)
 

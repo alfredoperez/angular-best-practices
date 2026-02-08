@@ -83,6 +83,7 @@ export const SKILL_CONFIG: SkillConfig = {
 
     // Infrastructure (core/)
     'core': 17,
+    'di': 17,
     'error-handling': 17,
     'observability': 17,
     'pattern': 17,
