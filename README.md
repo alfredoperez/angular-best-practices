@@ -12,6 +12,23 @@ npx skills add alfredoperez/angular-best-practices
 
 Supports: Claude Code, Cursor, Codex, OpenCode, VS Code Copilot, and 30+ more agents.
 
+### Available Skills
+
+| Skill | Description | Rules |
+|-------|-------------|-------|
+| `angular-best-practices` | Core Angular rules (~45KB) | 84 |
+| `angular-best-practices-ngrx` | NgRx state management | 5 |
+| `angular-best-practices-signalstore` | SignalStore patterns | 4 |
+| `angular-best-practices-tanstack` | TanStack Query patterns | 4 |
+
+Install optional library skills alongside the core:
+
+```bash
+npx skills add alfredoperez/angular-best-practices-ngrx
+npx skills add alfredoperez/angular-best-practices-signalstore
+npx skills add alfredoperez/angular-best-practices-tanstack
+```
+
 ### Manual Installation
 
 Or copy `AGENTS.md` directly to your project:
@@ -24,7 +41,7 @@ Or copy `AGENTS.md` directly to your project:
 
 ## Purpose
 
-This repository provides **100 curated rules** for building performant, maintainable Angular applications. Each rule is designed to be:
+This repository provides **100 curated rules** for building performant, maintainable Angular applications. Every rule is **human-reviewed for accuracy and token efficiency**. Each rule is designed to be:
 
 - **Concise**: Under 50 lines with 1-3 line code examples
 - **Actionable**: Clear "incorrect" vs "correct" patterns

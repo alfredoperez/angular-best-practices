@@ -99,3 +99,23 @@ This file defines all rule categories, their ordering, impact levels, and descri
 **Impact:** MEDIUM (API integration)
 **Description:** HTTP client patterns and data transformation.
 
+## 20. Angular Material (material-)
+
+**Impact:** MEDIUM (UI components)
+**Description:** Angular Material component usage, theming, CDK utilities, and test harnesses.
+
+## 21. PrimeNG (primeng-)
+
+**Impact:** MEDIUM (UI components)
+**Description:** PrimeNG component imports, theming system, and table patterns.
+
+## 22. Spartan UI (spartan-)
+
+**Impact:** MEDIUM (Headless UI)
+**Description:** Spartan Brain/Helm headless components, Tailwind integration, and accessibility.
+
+## 23. Internationalization (transloco-)
+
+**Impact:** MEDIUM (Internationalization)
+**Description:** Transloco runtime i18n, lazy-loaded translations, and test mocking.
+

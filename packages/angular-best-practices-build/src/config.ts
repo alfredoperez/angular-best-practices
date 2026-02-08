@@ -102,6 +102,18 @@ export const SKILL_CONFIG: SkillConfig = {
 
     // Performance (general - maps to JS perf)
     'performance': 3,
+
+    // Angular Material
+    'material': 20,
+
+    // PrimeNG
+    'primeng': 21,
+
+    // Spartan UI
+    'spartan': 22,
+
+    // Internationalization
+    'transloco': 23,
   },
 }
 
@@ -126,6 +138,10 @@ export const SECTION_TITLES: Record<number, string> = {
   17: 'Infrastructure',
   18: 'UI & Accessibility',
   19: 'Data Handling',
+  20: 'Angular Material',
+  21: 'PrimeNG',
+  22: 'Spartan UI',
+  23: 'Internationalization',
 }
 
 // Optional skills configuration
@@ -159,6 +175,34 @@ export const OPTIONAL_SKILLS: OptionalSkill[] = [
     tags: ['angular', 'tanstack-query', 'server-state'],
     globs: ['**/*.ts', '**/*.service.ts'],
   },
+  {
+    name: 'angular-best-practices-material',
+    description: 'Angular Material & CDK best practices. Install alongside angular-best-practices.',
+    sections: [20],
+    tags: ['angular', 'material', 'cdk', 'ui-components'],
+    globs: ['**/*.ts', '**/*.component.ts', '**/*.scss'],
+  },
+  {
+    name: 'angular-best-practices-primeng',
+    description: 'PrimeNG best practices for Angular. Install alongside angular-best-practices.',
+    sections: [21],
+    tags: ['angular', 'primeng', 'ui-components'],
+    globs: ['**/*.ts', '**/*.component.ts', '**/*.html'],
+  },
+  {
+    name: 'angular-best-practices-spartan',
+    description: 'Spartan UI (shadcn for Angular) best practices. Install alongside angular-best-practices.',
+    sections: [22],
+    tags: ['angular', 'spartan', 'headless-ui', 'tailwind'],
+    globs: ['**/*.ts', '**/*.component.ts', '**/*.html'],
+  },
+  {
+    name: 'angular-best-practices-transloco',
+    description: 'Transloco i18n best practices for Angular. Install alongside angular-best-practices.',
+    sections: [23],
+    tags: ['angular', 'transloco', 'i18n', 'internationalization'],
+    globs: ['**/*.ts', '**/*.html', '**/*.json'],
+  },
 ]
 
 // Section impact levels
@@ -182,4 +226,8 @@ export const SECTION_IMPACTS: Record<number, { impact: string; description?: str
   17: { impact: 'MEDIUM', description: 'Cross-cutting concerns' },
   18: { impact: 'MEDIUM', description: 'User experience' },
   19: { impact: 'MEDIUM', description: 'API integration' },
+  20: { impact: 'MEDIUM', description: 'UI components' },
+  21: { impact: 'MEDIUM', description: 'UI components' },
+  22: { impact: 'MEDIUM', description: 'Headless UI' },
+  23: { impact: 'MEDIUM', description: 'Internationalization' },
 }

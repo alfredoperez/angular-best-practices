@@ -16,10 +16,14 @@ rules/                    # Rule files organized by category
   _template.md            # Template for new rules
   _sections.md            # Category definitions
 skills/                   # All skills (generated AGENTS.md + SKILL.md)
-  angular-best-practices/           # Core skill (84 rules)
+  angular-best-practices/           # Core skill (93 rules)
   angular-best-practices-ngrx/      # NgRx rules (5 rules)
   angular-best-practices-signalstore/ # SignalStore rules (4 rules)
   angular-best-practices-tanstack/  # TanStack Query rules (4 rules)
+  angular-best-practices-material/  # Angular Material & CDK rules (4 rules)
+  angular-best-practices-primeng/   # PrimeNG rules (3 rules)
+  angular-best-practices-spartan/   # Spartan UI rules (3 rules)
+  angular-best-practices-transloco/ # Transloco i18n rules (3 rules)
 packages/                 # Build tooling
   angular-best-practices-build/
 ```
@@ -46,16 +50,25 @@ Usage:
 - "Audit all rules for code example length"
 - "Rewrite architecture.md to be concise"
 
+### rule-creator
+
+Creates new rule files and library skills following project conventions.
+
+Usage:
+- "Create a rule for X"
+- "Create a new library skill for X"
+
 ## Creating New Rules
 
 1. Copy `rules/_template.md`
 2. Follow the format exactly
 3. Keep code examples to 1-3 lines
 4. Run rules-reviewer to validate
+5. Or use the `rule-creator` skill to automate the process
 
 ## Optional Library Skills
 
-Library-specific rules (NgRx, SignalStore, TanStack Query) are split into separate installable skills so users only get what they need.
+Library-specific rules (NgRx, SignalStore, TanStack Query, Material, PrimeNG, Spartan, Transloco) are split into separate installable skills so users only get what they need.
 
 **Config:** `packages/angular-best-practices-build/src/config.ts` — `OPTIONAL_SKILLS` array defines which sections become separate skills.
 
@@ -67,6 +80,18 @@ Library-specific rules (NgRx, SignalStore, TanStack Query) are split into separa
 1. Add entry to `OPTIONAL_SKILLS` in `config.ts`
 2. Create `skills/<name>/SKILL.md` with frontmatter
 3. Run `npm run build`
+
+## Commit Conventions
+
+Use [Conventional Commits](https://www.conventionalcommits.org/) format:
+
+- `feat:` — new rules, skills, or features
+- `fix:` — bug fixes
+- `chore:` — maintenance, config changes, build updates
+- `docs:` — documentation-only changes
+- `refactor:` — code restructuring without behavior change
+
+Do **not** add AI attribution (e.g., `Co-Authored-By`) to commits.
 
 ## Inspired By
 
