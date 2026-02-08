@@ -1,0 +1,222 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-bg: #0a0a0a;
+  --color-bg-card: #111111;
+  --color-bg-hover: #1a1a1a;
+  --color-border: #2a2a2a;
+  --color-border-bright: #555555;
+  --color-text: #ededed;
+  --color-text-muted: #999999;
+  --color-text-dim: #666666;
+  --color-accent: #3b82f6;
+  --color-accent-hover: #60a5fa;
+
+  --color-impact-critical: #ef4444;
+  --color-impact-high: #f97316;
+  --color-impact-medium: #eab308;
+  --color-impact-low: #22c55e;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+::selection {
+  background-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Terminal-style command box */
+.terminal-box {
+  background-color: #050505;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-family: var(--font-geist-mono);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+/* ── Glitch Keyframes ── */
+
+@keyframes glitch {
+  0%, 90%, 100% {
+    transform: translate(0);
+  }
+  91% {
+    transform: translate(-2px, 1px) skewX(-1deg);
+  }
+  93% {
+    transform: translate(2px, -1px) skewX(1deg);
+  }
+  95% {
+    transform: translate(-1px, 2px);
+  }
+  97% {
+    transform: translate(1px, -2px) skewX(-0.5deg);
+  }
+}
+
+@keyframes glitch-color {
+  0%, 88%, 100% {
+    text-shadow: none;
+  }
+  90% {
+    text-shadow: -2px 0 #0ff, 2px 0 #f00;
+  }
+  92% {
+    text-shadow: 2px 0 #0ff, -2px 0 #f00;
+  }
+  94% {
+    text-shadow: -1px 0 #f00, 1px 0 #0ff;
+  }
+  96% {
+    text-shadow: 1px 0 #f00, -1px 0 #0ff;
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes flicker {
+  0%, 95%, 100% {
+    opacity: 1;
+  }
+  96% {
+    opacity: 0.8;
+  }
+  97% {
+    opacity: 1;
+  }
+  98% {
+    opacity: 0.6;
+  }
+  99% {
+    opacity: 0.9;
+  }
+}
+
+/* ── Glitch Text ── */
+
+.glitch-text {
+  position: relative;
+  animation: glitch 3s infinite, glitch-color 3s infinite;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.glitch-text::before {
+  color: #0ff;
+  animation: glitch 2s infinite reverse;
+  clip-path: inset(10% 0 60% 0);
+  opacity: 0.6;
+}
+
+.glitch-text::after {
+  color: #f00;
+  animation: glitch 2.5s infinite;
+  clip-path: inset(50% 0 20% 0);
+  opacity: 0.6;
+}
+
+/* ── Scanlines Overlay ── */
+
+.scanlines {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Moving Scanline ── */
+
+.scanline-move {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanline-move::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  animation: scanline 4s linear infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── Glitch Image ── */
+
+@keyframes glitch-image-color {
+  0%, 88%, 100% {
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  90% {
+    filter: drop-shadow(-3px 0 0 #0ff) drop-shadow(3px 0 0 #f00);
+  }
+  92% {
+    filter: drop-shadow(3px 0 0 #0ff) drop-shadow(-3px 0 0 #f00);
+  }
+  94% {
+    filter: drop-shadow(-2px 0 0 #f00) drop-shadow(2px 0 0 #0ff);
+  }
+  96% {
+    filter: drop-shadow(2px 0 0 #f00) drop-shadow(-2px 0 0 #0ff);
+  }
+}
+
+.glitch-image {
+  animation: glitch 3s infinite, glitch-image-color 3s infinite;
+}
+
+/* ── Glitch Border ── */
+
+.glitch-border {
+  animation: flicker 4s infinite;
+}
