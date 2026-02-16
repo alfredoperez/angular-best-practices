@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: alfredoperez
-  version: "1.0"
+  version: "1.1.0"
 tags: [angular, primeng, ui-components]
 globs:
   - "**/*.ts"
@@ -21,6 +21,12 @@ globs:
 PrimeNG rules for component imports, table performance, and theming. Use with the core
 [angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices/angular-best-practices)
 skill for comprehensive Angular coverage.
+
+## Links
+
+- [Core Skill: angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices/angular-best-practices)
+- [Browse All Skills](https://skills.sh/alfredoperez/angular-best-practices)
+- [GitHub Repository](https://github.com/alfredoperez/angular-best-practices)
 
 ## When to Apply
 
@@ -44,4 +50,4 @@ Core skill (recommended):
 This add-on:
 `npx skills add alfredoperez/angular-best-practices --skill angular-best-practices-primeng`
 
-Browse all skills: https://skills.sh/alfredoperez/angular-best-practices
+Browse all skills: [skills.sh/alfredoperez/angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices)

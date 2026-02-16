@@ -5,7 +5,7 @@ description: >-
   applications. Covers Signals, RxJS, performance, SSR, testing, forms, routing,
   and architecture. Library-specific add-ons available for NgRx, SignalStore,
   TanStack Query, Material, PrimeNG, Spartan UI, and Transloco.
-version: 1.0.0
+version: 1.1.0
 author: alfredoperez
 tags:
   - angular
