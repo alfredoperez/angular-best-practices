@@ -1,13 +1,15 @@
 ---
 name: angular-best-practices-primeng
-description: PrimeNG best practices for Angular. Install alongside angular-best-practices.
+description: >-
+  PrimeNG best practices for Angular. Covers tree-shaking imports, lazy-loaded
+  tables, and the Aura/Lara theme system with design tokens.
+  Activates when working with primeng components.
+  Install alongside angular-best-practices for full coverage.
+license: MIT
 metadata:
   author: alfredoperez
   version: "1.0"
-tags:
-  - angular
-  - primeng
-  - ui-components
+tags: [angular, primeng, ui-components]
 globs:
   - "**/*.ts"
   - "**/*.component.ts"
@@ -16,8 +18,30 @@ globs:
 
 # Angular PrimeNG Best Practices
 
-PrimeNG rules. Use with the core `angular-best-practices` skill.
+PrimeNG rules for component imports, table performance, and theming. Use with the core
+[angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices/angular-best-practices)
+skill for comprehensive Angular coverage.
+
+## When to Apply
+
+- Importing PrimeNG standalone components
+- Configuring tables with server-side pagination or virtual scrolling
+- Setting up Aura/Lara themes with design tokens
 
 ## Rules
 
-See [AGENTS.md](AGENTS.md) for the complete rule set.
+| Rule | Impact | Description |
+|------|--------|-------------|
+| Tree-Shake PrimeNG Imports | MEDIUM | Standalone component imports for smaller bundles |
+| Use PrimeNG Table with Lazy Loading | HIGH | Server-side pagination for large datasets |
+| Use PrimeNG Theme System | MEDIUM | Design tokens via providePrimeNG instead of CSS overrides |
+
+## Install
+
+Core skill (recommended):
+`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices`
+
+This add-on:
+`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices-primeng`
+
+Browse all skills: https://skills.sh/alfredoperez/angular-best-practices

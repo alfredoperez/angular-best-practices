@@ -2,7 +2,7 @@
 
 **Version 1.0.0**
 Angular Best Practices
-February 7, 2026
+February 16, 2026
 
 > **Note:**
 > This document is optimized for AI agents and LLMs. It provides

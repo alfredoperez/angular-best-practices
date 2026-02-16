@@ -1,14 +1,15 @@
 ---
 name: angular-best-practices-material
-description: Angular Material & CDK best practices. Install alongside angular-best-practices.
+description: >-
+  Angular Material and CDK best practices. Covers selective imports, M3 theming,
+  CDK utilities, and component test harnesses.
+  Activates when working with @angular/material and @angular/cdk.
+  Install alongside angular-best-practices for full coverage.
+license: MIT
 metadata:
   author: alfredoperez
   version: "1.0"
-tags:
-  - angular
-  - material
-  - cdk
-  - ui-components
+tags: [angular, material, cdk, ui-components]
 globs:
   - "**/*.ts"
   - "**/*.component.ts"
@@ -17,8 +18,32 @@ globs:
 
 # Angular Material Best Practices
 
-Angular Material & CDK rules. Use with the core `angular-best-practices` skill.
+Angular Material and CDK rules for component usage, theming, and testing. Use with the core
+[angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices/angular-best-practices)
+skill for comprehensive Angular coverage.
+
+## When to Apply
+
+- Importing and configuring Material components
+- Setting up M3 theming with design tokens
+- Using CDK utilities for overlays, drag-and-drop, or virtual scrolling
+- Writing tests for Material components
 
 ## Rules
 
-See [AGENTS.md](AGENTS.md) for the complete rule set.
+| Rule | Impact | Description |
+|------|--------|-------------|
+| Import Material Modules Selectively | MEDIUM | Tree-shake unused components with standalone imports |
+| Use Angular Material Theming System | MEDIUM | M3 theme API with CSS custom properties |
+| Use CDK Utilities Over Custom Implementations | MEDIUM | Battle-tested overlays, virtual scroll, and a11y primitives |
+| Use Test Harnesses for Material Components | HIGH | Stable tests that survive internal DOM changes |
+
+## Install
+
+Core skill (recommended):
+`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices`
+
+This add-on:
+`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices-material`
+
+Browse all skills: https://skills.sh/alfredoperez/angular-best-practices

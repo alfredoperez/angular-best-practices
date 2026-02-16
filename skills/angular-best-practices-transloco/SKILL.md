@@ -1,14 +1,15 @@
 ---
 name: angular-best-practices-transloco
-description: Transloco i18n best practices for Angular. Install alongside angular-best-practices.
+description: >-
+  Transloco i18n best practices for Angular. Covers runtime translation,
+  lazy-loaded translation files per route, and test mocking.
+  Activates when working with @jsverse/transloco.
+  Install alongside angular-best-practices for full coverage.
+license: MIT
 metadata:
   author: alfredoperez
   version: "1.0"
-tags:
-  - angular
-  - transloco
-  - i18n
-  - internationalization
+tags: [angular, transloco, i18n, internationalization]
 globs:
   - "**/*.ts"
   - "**/*.html"
@@ -17,8 +18,30 @@ globs:
 
 # Angular Transloco Best Practices
 
-Transloco internationalization rules. Use with the core `angular-best-practices` skill.
+Transloco rules for runtime internationalization, lazy-loaded translations, and testing. Use with the core
+[angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices/angular-best-practices)
+skill for comprehensive Angular coverage.
+
+## When to Apply
+
+- Adding runtime i18n with the `transloco` pipe or directive
+- Lazy-loading translation files per route with scopes
+- Writing tests that use `TranslocoTestingModule`
 
 ## Rules
 
-See [AGENTS.md](AGENTS.md) for the complete rule set.
+| Rule | Impact | Description |
+|------|--------|-------------|
+| Lazy Load Translation Files per Route | MEDIUM | Load scoped translations only when a route is activated |
+| Mock Translations in Tests | MEDIUM | Fast deterministic tests without HTTP translation loading |
+| Use Transloco for Runtime i18n | MEDIUM | Dynamic language switching without app rebuilds |
+
+## Install
+
+Core skill (recommended):
+`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices`
+
+This add-on:
+`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices-transloco`
+
+Browse all skills: https://skills.sh/alfredoperez/angular-best-practices

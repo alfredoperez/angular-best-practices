@@ -1,14 +1,15 @@
 ---
 name: angular-best-practices-signalstore
-description: NgRx SignalStore best practices for Angular. Install alongside angular-best-practices.
+description: >-
+  NgRx SignalStore best practices for Angular. Covers shared state,
+  computed state, entity management, and RxJS integration with rxMethod.
+  Activates when working with @ngrx/signals and @ngrx/signals/entities.
+  Install alongside angular-best-practices for full coverage.
+license: MIT
 metadata:
   author: alfredoperez
   version: "1.0"
-tags:
-  - angular
-  - ngrx-signals
-  - signalstore
-  - state-management
+tags: [angular, ngrx-signals, signalstore, state-management]
 globs:
   - "**/*.ts"
   - "**/*.store.ts"
@@ -16,8 +17,31 @@ globs:
 
 # Angular SignalStore Best Practices
 
-NgRx SignalStore rules. Use with the core `angular-best-practices` skill.
+NgRx SignalStore rules for signal-based local and feature state management. Use with the core
+[angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices/angular-best-practices)
+skill for comprehensive Angular coverage.
+
+## When to Apply
+
+- Creating or modifying SignalStore-based state management
+- Integrating RxJS side effects with `rxMethod`
+- Managing collections with `withEntities`
 
 ## Rules
 
-See [AGENTS.md](AGENTS.md) for the complete rule set.
+| Rule | Impact | Description |
+|------|--------|-------------|
+| Use rxMethod for RxJS Integration | MEDIUM | Debounce, switchMap, and other RxJS operators in stores |
+| Use SignalStore for Shared State | HIGH | Signal-based reactivity without full NgRx overhead |
+| Use withComputed for Derived State | MEDIUM | Centralized memoized derivation logic |
+| Use withEntities for Collections | MEDIUM | O(1) lookups and standardized CRUD operations |
+
+## Install
+
+Core skill (recommended):
+`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices`
+
+This add-on:
+`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices-signalstore`
+
+Browse all skills: https://skills.sh/alfredoperez/angular-best-practices

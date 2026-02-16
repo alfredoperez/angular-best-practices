@@ -1,6 +1,12 @@
 ---
-name: rules-reviewer
-description: Validates Angular rules are real, accurate, and valuable. Researches best practices, validates code examples, and checks for clear decision criteria.
+name: angular-best-practices-rules-reviewer
+description: >-
+  For contributors to angular-best-practices. Reviews and audits rule files
+  for accuracy, validity, and formatting compliance. Not for Angular
+  application development — install angular-best-practices instead.
+metadata:
+  audience: contributors
+  project: angular-best-practices
 ---
 
 # Rules Reviewer Agent

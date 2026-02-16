@@ -1,13 +1,15 @@
 ---
 name: angular-best-practices-ngrx
-description: NgRx state management best practices for Angular. Install alongside angular-best-practices.
+description: >-
+  NgRx state management best practices for Angular. Covers pure reducers,
+  action groups, entity adapter, selectors, and signal-based selection.
+  Activates when working with @ngrx/store, @ngrx/effects, and @ngrx/entity.
+  Install alongside angular-best-practices for full coverage.
+license: MIT
 metadata:
   author: alfredoperez
   version: "1.0"
-tags:
-  - angular
-  - ngrx
-  - state-management
+tags: [angular, ngrx, state-management, redux]
 globs:
   - "**/*.ts"
   - "**/*.reducer.ts"
@@ -17,8 +19,32 @@ globs:
 
 # Angular NgRx Best Practices
 
-NgRx state management rules. Use with the core `angular-best-practices` skill.
+NgRx state management rules for global state with actions, reducers, effects, and selectors. Use with the core
+[angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices/angular-best-practices)
+skill for comprehensive Angular coverage.
+
+## When to Apply
+
+- Adding or modifying NgRx stores, reducers, or effects
+- Writing selectors for state selection in components
+- Managing collections with `@ngrx/entity`
 
 ## Rules
 
-See [AGENTS.md](AGENTS.md) for the complete rule set.
+| Rule | Impact | Description |
+|------|--------|-------------|
+| Keep Reducers Pure | HIGH | No side effects in reducers; move HTTP calls to Effects |
+| Use createActionGroup | MEDIUM | Group related actions by source to reduce boilerplate |
+| Use Entity Adapter for Collections | MEDIUM | O(1) lookups and auto-generated selectors for CRUD |
+| Use Feature Selectors | MEDIUM | Memoized selectors that recompute only when inputs change |
+| Use selectSignal in Components | MEDIUM | Signal-based selection for simpler templates and zoneless support |
+
+## Install
+
+Core skill (recommended):
+`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices`
+
+This add-on:
+`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices-ngrx`
+
+Browse all skills: https://skills.sh/alfredoperez/angular-best-practices

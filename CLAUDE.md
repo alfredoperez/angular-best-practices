@@ -37,11 +37,11 @@ Rules must be **concise** for efficient AI context usage:
 - **Code blocks:** 2 max (incorrect + correct)
 - **Total length:** Under 50 lines
 
-See `.claude/skills/rules-reviewer/SKILL.md` for the full review criteria.
+See `.claude/skills/angular-best-practices-rules-reviewer/SKILL.md` for the full review criteria.
 
 ## Available Skills
 
-### rules-reviewer
+### angular-best-practices-rules-reviewer
 
 Reviews and audits rule files for compliance with formatting standards.
 
@@ -50,7 +50,7 @@ Usage:
 - "Audit all rules for code example length"
 - "Rewrite architecture.md to be concise"
 
-### rule-creator
+### angular-best-practices-rule-creator
 
 Creates new rule files and library skills following project conventions.
 
@@ -63,8 +63,8 @@ Usage:
 1. Copy `rules/_template.md`
 2. Follow the format exactly
 3. Keep code examples to 1-3 lines
-4. Run rules-reviewer to validate
-5. Or use the `rule-creator` skill to automate the process
+4. Run angular-best-practices-rules-reviewer to validate
+5. Or use the `angular-best-practices-rule-creator` skill to automate the process
 
 ## Optional Library Skills
 

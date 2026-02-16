@@ -1,6 +1,12 @@
 ---
-name: rule-creator
-description: Creates new rule files and library skills following project conventions, prefix-to-section mapping, and template standards.
+name: angular-best-practices-rule-creator
+description: >-
+  For contributors to angular-best-practices. Creates new rule files and
+  library skills following project conventions. Not for Angular application
+  development — install angular-best-practices instead.
+metadata:
+  audience: contributors
+  project: angular-best-practices
 ---
 
 # Rule Creator Agent
@@ -31,7 +37,7 @@ When asked to create a rule:
    - **Code per block:** 3-5 lines max
    - **Total length:** Under 50 lines (ideal 30-40)
    - **No** installation commands, configuration dumps, or folder structures
-6. Validate with the `rules-reviewer` skill
+6. Validate with the `angular-best-practices-rules-reviewer` skill
 
 ### 2. Create a New Library Skill
 
