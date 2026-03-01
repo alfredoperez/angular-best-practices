@@ -13,7 +13,7 @@ Use ngx-formly for forms driven by configuration (JSON/API). Define field config
 
 ```html
 <!-- Manually building 50+ fields with repeated template markup -->
-<input *ngFor="let f of fields" [formControlName]="f.key" [type]="f.type" />
+@for (f of fields; track f.key) { <input [formControlName]="f.key" [type]="f.type" /> }
 ```
 
 **Correct:**

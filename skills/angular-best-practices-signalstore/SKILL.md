@@ -4,11 +4,12 @@ description: >-
   NgRx SignalStore best practices for Angular. Covers shared state,
   computed state, entity management, and RxJS integration with rxMethod.
   Activates when working with @ngrx/signals and @ngrx/signals/entities.
+  Do not use for NgRx Store or class-based state services.
   Install alongside angular-best-practices for full coverage.
 license: MIT
 metadata:
   author: alfredoperez
-  version: "1.1.0"
+  version: "1.2.0"
 tags: [angular, ngrx-signals, signalstore, state-management]
 globs:
   - "**/*.ts"
@@ -44,10 +45,7 @@ skill for comprehensive Angular coverage.
 
 ## Install
 
-Core skill (recommended):
-`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices`
+Install from [skills.sh/alfredoperez/angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices):
 
-This add-on:
-`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices-signalstore`
-
-Browse all skills: [skills.sh/alfredoperez/angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices)
+- Core skill: [angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices/angular-best-practices)
+- This add-on: [angular-best-practices-signalstore](https://skills.sh/alfredoperez/angular-best-practices/angular-best-practices-signalstore)

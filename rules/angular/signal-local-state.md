@@ -7,4 +7,4 @@ tags: signals, state, performance
 
 ## Use Signals for Local State
 
-Use `signal<T>(initialValue)` instead of plain class properties for component state. Signals provide fine-grained reactivity and enable zoneless change detection. Update with `.set()`, `.update()`, or `.mutate()`.
+Use `signal<T>(initialValue)` instead of plain class properties for component state — signals provide fine-grained reactivity and enable zoneless change detection, updated with `.set()` or `.update()`.

@@ -4,11 +4,12 @@ description: >-
   Transloco i18n best practices for Angular. Covers runtime translation,
   lazy-loaded translation files per route, and test mocking.
   Activates when working with @jsverse/transloco.
+  Do not use for ngx-translate or i18next.
   Install alongside angular-best-practices for full coverage.
 license: MIT
 metadata:
   author: alfredoperez
-  version: "1.1.0"
+  version: "1.2.0"
 tags: [angular, transloco, i18n, internationalization]
 globs:
   - "**/*.ts"
@@ -44,10 +45,7 @@ skill for comprehensive Angular coverage.
 
 ## Install
 
-Core skill (recommended):
-`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices`
+Install from [skills.sh/alfredoperez/angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices):
 
-This add-on:
-`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices-transloco`
-
-Browse all skills: [skills.sh/alfredoperez/angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices)
+- Core skill: [angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices/angular-best-practices)
+- This add-on: [angular-best-practices-transloco](https://skills.sh/alfredoperez/angular-best-practices/angular-best-practices-transloco)

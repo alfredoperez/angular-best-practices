@@ -4,11 +4,12 @@ description: >-
   TanStack Query best practices for Angular. Covers query/mutation patterns,
   cache invalidation, and query key factories for server state management.
   Activates when working with @tanstack/angular-query-experimental.
+  Do not use for NgRx Effects, manual HTTP caching, or RxJS-based server state.
   Install alongside angular-best-practices for full coverage.
 license: MIT
 metadata:
   author: alfredoperez
-  version: "1.1.0"
+  version: "1.2.0"
 tags: [angular, tanstack-query, server-state, caching]
 globs:
   - "**/*.ts"
@@ -38,16 +39,11 @@ skill for comprehensive Angular coverage.
 | Rule | Impact | Description |
 |------|--------|-------------|
 | Know When to Use TanStack Query | MEDIUM | Server state (APIs) vs client state (signals) |
-| Use Mutations with Cache Invalidation | MEDIUM | Invalidate related queries on write operations |
 | Use Query Key Factories | MEDIUM | Consistent key structure for hierarchical invalidation |
-| Use TanStack Query for Server State | HIGH | Automatic caching, deduplication, and background updates |
 
 ## Install
 
-Core skill (recommended):
-`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices`
+Install from [skills.sh/alfredoperez/angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices):
 
-This add-on:
-`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices-tanstack`
-
-Browse all skills: [skills.sh/alfredoperez/angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices)
+- Core skill: [angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices/angular-best-practices)
+- This add-on: [angular-best-practices-tanstack](https://skills.sh/alfredoperez/angular-best-practices/angular-best-practices-tanstack)

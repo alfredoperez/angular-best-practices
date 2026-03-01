@@ -33,20 +33,20 @@ Use Transloco scopes to load translation files only when a route is activated. D
 
 **Impact: MEDIUM** (Fast tests without HTTP translation loading)
 
-Use `TranslocoTestingModule` with inline translation objects for unit tests. Avoids HTTP requests and ensures tests run fast and deterministically.
+Provide inline translations in tests with `provideTranslocoTesting()` to avoid HTTP requests and ensure fast, deterministic runs.
 
 **Incorrect:**
 
 ```typescript
 // Loading real translation files in tests — slow, flaky, needs HTTP mock
-TestBed.configureTestingModule({ imports: [TranslocoModule] });
+TestBed.configureTestingModule({ providers: [provideTransloco({ /* full config */ })] });
 ```
 
 **Correct:**
 
 ```typescript
 TestBed.configureTestingModule({
-  imports: [TranslocoTestingModule.forRoot({
+  providers: [provideTranslocoTesting({
     langs: { en: { 'actions.save': 'Save' } }, defaultLang: 'en',
   })],
 });
@@ -56,7 +56,7 @@ TestBed.configureTestingModule({
 
 **Impact: MEDIUM** (Dynamic language switching without rebuilds)
 
-Use Transloco for runtime internationalization. Configure the `TranslocoModule` with a loader and use the `transloco` pipe or `*transloco` structural directive in templates.
+Use `provideTransloco()` for runtime internationalization with the `transloco` pipe in templates.
 
 **Incorrect:**
 

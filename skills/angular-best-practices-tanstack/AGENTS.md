@@ -23,13 +23,7 @@ users = injectQuery(() => ({ queryKey: ['users'], queryFn: fetchUsers }));
 formDirty = signal(false);
 ```
 
-### 1.2 Use Mutations with Cache Invalidation
-
-**Impact: MEDIUM** (Consistent cache, automatic refetch)
-
-Use `injectMutation(() => ({ mutationFn, onSuccess }))` for write operations. Invalidate related queries in `onSuccess` with `queryClient.invalidateQueries({ queryKey })` to keep cache consistent with server state.
-
-### 1.3 Use Query Key Factories
+### 1.2 Use Query Key Factories
 
 **Impact: MEDIUM** (Consistent invalidation, hierarchical keys)
 
@@ -44,11 +38,5 @@ const userKeys = {
 };
 // Invalidate all user queries: queryClient.invalidateQueries({ queryKey: userKeys.all })
 ```
-
-### 1.4 Use TanStack Query for Server State
-
-**Impact: HIGH** (Automatic caching, deduplication, background updates)
-
-Use `injectQuery(() => ({ queryKey, queryFn }))` for data fetched from APIs. TanStack Query handles caching, deduplication, background refetching, and loading/error states automatically. Access data via `query.data()`, `query.isPending()`, `query.isError()`.
 
 ---

@@ -13,7 +13,7 @@ Spartan Brain directives handle ARIA attributes, keyboard navigation, and focus 
 
 ```typescript
 // Custom tabs — missing aria-selected, arrow key navigation, focus management
-@Component({ template: '<div *ngFor="let t of tabs" (click)="select(t)">{{t.label}}</div>' })
+@Component({ template: '@for (t of tabs; track t.id) { <div (click)="select(t)">{{t.label}}</div> }' })
 ```
 
 **Correct:**

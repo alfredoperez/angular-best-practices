@@ -1,23 +1,18 @@
 ---
-title: Cache API Results in Web Storage
+title: Cache API Results with Interceptors
 impact: MEDIUM
 impactDescription: Eliminates redundant network requests
-tags: caching, storage, performance
+tags: caching, performance, http
 ---
 
-## Cache API Results in Web Storage
+## Cache API Results with Interceptors
 
-Cache API results in sessionStorage with TTL for faster subsequent loads.
+Use an HTTP interceptor or service-level caching with signals to avoid redundant API calls — prefer Angular-idiomatic patterns over raw `sessionStorage`.
 
 ```typescript
-loadConfig() {
-  const cached = sessionStorage.getItem('config');
-  if (cached) {
-    const { data, expires } = JSON.parse(cached);
-    if (Date.now() < expires) return of(data);
-  }
-  return this.http.get<Config>('/api/config').pipe(
-    tap(d => sessionStorage.setItem('config', JSON.stringify({ data: d, expires: Date.now() + 300000 })))
-  );
-}
+// Service-level caching with signals
+private configCache = signal<Config | null>(null);
+loadConfig = () => this.configCache() ?? this.http.get<Config>('/api/config').pipe(
+  tap(d => this.configCache.set(d))
+);
 ```

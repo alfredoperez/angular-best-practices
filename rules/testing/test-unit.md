@@ -11,7 +11,7 @@ Use Vitest for unit testing services, pipes, guards, and signals. For signals, s
 
 ```typescript
 it('should fetch users', async () => {
-  TestBed.configureTestingModule({ imports: [HttpClientTestingModule] });
+  TestBed.configureTestingModule({ providers: [provideHttpClient(), provideHttpClientTesting()] });
   const service = TestBed.inject(UserService);
   expect(await firstValueFrom(service.getUsers())).toBeDefined();
 });

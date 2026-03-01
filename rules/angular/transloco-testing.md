@@ -7,20 +7,20 @@ tags: transloco, testing, mocks
 
 ## Mock Translations in Tests
 
-Use `TranslocoTestingModule` with inline translation objects for unit tests. Avoids HTTP requests and ensures tests run fast and deterministically.
+Provide inline translations in tests with `provideTranslocoTesting()` to avoid HTTP requests and ensure fast, deterministic runs.
 
 **Incorrect:**
 
 ```typescript
 // Loading real translation files in tests — slow, flaky, needs HTTP mock
-TestBed.configureTestingModule({ imports: [TranslocoModule] });
+TestBed.configureTestingModule({ providers: [provideTransloco({ /* full config */ })] });
 ```
 
 **Correct:**
 
 ```typescript
 TestBed.configureTestingModule({
-  imports: [TranslocoTestingModule.forRoot({
+  providers: [provideTranslocoTesting({
     langs: { en: { 'actions.save': 'Save' } }, defaultLang: 'en',
   })],
 });

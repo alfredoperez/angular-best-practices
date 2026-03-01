@@ -11,7 +11,7 @@ metadata:
 
 # Rule Creator Agent
 
-You create new Angular best practice rules and optional library skills following the exact project conventions.
+Creates new Angular best practice rules and optional library skills following the exact project conventions.
 
 ## Capabilities
 
@@ -50,7 +50,7 @@ When asked to create a new optional library skill:
    - Add section impact in `SECTION_IMPACTS`
    - Add entry in `OPTIONAL_SKILLS` array
 3. Add section definition in `rules/_sections.md`
-4. Create `skills/<skill-name>/SKILL.md` with frontmatter (name, description, metadata, tags, globs)
+4. Create `skills/<skill-name>/SKILL.md` with frontmatter (name, description, metadata, tags, globs). Read `.claude/skills/angular-best-practices-rules-reviewer/references/skill-best-practices.md` for SKILL.md quality standards.
 5. Create initial rule files in `rules/angular/` with the skill's prefix
 6. Run `npm run build` to generate AGENTS.md files
 

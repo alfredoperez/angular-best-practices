@@ -7,7 +7,7 @@ tags: transloco, i18n, internationalization
 
 ## Use Transloco for Runtime i18n
 
-Use Transloco for runtime internationalization. Configure the `TranslocoModule` with a loader and use the `transloco` pipe or `*transloco` structural directive in templates.
+Use `provideTransloco()` for runtime internationalization with the `transloco` pipe in templates.
 
 **Incorrect:**
 

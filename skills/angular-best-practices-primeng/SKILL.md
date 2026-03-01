@@ -4,11 +4,12 @@ description: >-
   PrimeNG best practices for Angular. Covers tree-shaking imports, lazy-loaded
   tables, and the Aura/Lara theme system with design tokens.
   Activates when working with primeng components.
+  Do not use for Angular Material, Spartan UI, or other component libraries.
   Install alongside angular-best-practices for full coverage.
 license: MIT
 metadata:
   author: alfredoperez
-  version: "1.1.0"
+  version: "1.2.0"
 tags: [angular, primeng, ui-components]
 globs:
   - "**/*.ts"
@@ -44,10 +45,7 @@ skill for comprehensive Angular coverage.
 
 ## Install
 
-Core skill (recommended):
-`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices`
+Install from [skills.sh/alfredoperez/angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices):
 
-This add-on:
-`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices-primeng`
-
-Browse all skills: [skills.sh/alfredoperez/angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices)
+- Core skill: [angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices/angular-best-practices)
+- This add-on: [angular-best-practices-primeng](https://skills.sh/alfredoperez/angular-best-practices/angular-best-practices-primeng)

@@ -4,11 +4,12 @@ description: >-
   Spartan UI (shadcn for Angular) best practices. Covers Brain/Helm architecture,
   Tailwind integration, and accessible headless components.
   Activates when working with @spartan-ng/brain and @spartan-ng/ui.
+  Do not use for Angular Material, PrimeNG, or other component libraries.
   Install alongside angular-best-practices for full coverage.
 license: MIT
 metadata:
   author: alfredoperez
-  version: "1.1.0"
+  version: "1.2.0"
 tags: [angular, spartan, headless-ui, tailwind]
 globs:
   - "**/*.ts"
@@ -44,10 +45,7 @@ skill for comprehensive Angular coverage.
 
 ## Install
 
-Core skill (recommended):
-`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices`
+Install from [skills.sh/alfredoperez/angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices):
 
-This add-on:
-`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices-spartan`
-
-Browse all skills: [skills.sh/alfredoperez/angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices)
+- Core skill: [angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices/angular-best-practices)
+- This add-on: [angular-best-practices-spartan](https://skills.sh/alfredoperez/angular-best-practices/angular-best-practices-spartan)

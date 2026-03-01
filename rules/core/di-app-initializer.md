@@ -7,7 +7,7 @@ tags: dependency-injection, initialization, startup
 
 ## Use provideAppInitializer for Startup Logic
 
-Use `provideAppInitializer()` to run async setup code (config loading, auth checks) before the app renders.
+Use `provideAppInitializer()` (Angular 19+) or `{ provide: APP_INITIALIZER, useFactory: ..., multi: true }` (Angular 17-18) to run async setup code before the app renders.
 
 **Incorrect:**
 

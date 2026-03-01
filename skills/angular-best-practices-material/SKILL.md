@@ -4,11 +4,12 @@ description: >-
   Angular Material and CDK best practices. Covers selective imports, M3 theming,
   CDK utilities, and component test harnesses.
   Activates when working with @angular/material and @angular/cdk.
+  Do not use for PrimeNG, Spartan UI, or other component libraries.
   Install alongside angular-best-practices for full coverage.
 license: MIT
 metadata:
   author: alfredoperez
-  version: "1.1.0"
+  version: "1.2.0"
 tags: [angular, material, cdk, ui-components]
 globs:
   - "**/*.ts"
@@ -46,10 +47,7 @@ skill for comprehensive Angular coverage.
 
 ## Install
 
-Core skill (recommended):
-`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices`
+Install from [skills.sh/alfredoperez/angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices):
 
-This add-on:
-`npx skills add alfredoperez/angular-best-practices --skill angular-best-practices-material`
-
-Browse all skills: [skills.sh/alfredoperez/angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices)
+- Core skill: [angular-best-practices](https://skills.sh/alfredoperez/angular-best-practices/angular-best-practices)
+- This add-on: [angular-best-practices-material](https://skills.sh/alfredoperez/angular-best-practices/angular-best-practices-material)
