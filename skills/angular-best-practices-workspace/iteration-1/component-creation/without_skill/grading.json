@@ -1,0 +1,12 @@
+{
+  "expectations": [
+    {"text": "Component uses ChangeDetectionStrategy.OnPush", "passed": false, "evidence": "No changeDetection property set in @Component — defaults to Default strategy"},
+    {"text": "Component uses inject() instead of constructor injection", "passed": true, "evidence": "Lines 288-289: private readonly http = inject(HttpClient); private readonly fb = inject(FormBuilder);"},
+    {"text": "Component uses signal-based inputs (input() function) if it has inputs", "passed": true, "evidence": "No inputs used — N/A, passes by default"},
+    {"text": "Component uses signal() or computed() for local/derived state", "passed": true, "evidence": "Lines 291-296: signal(true), signal<string|null>(null), signal(false), signal(false), signal<User|null>(null), signal<Order[]>([])"},
+    {"text": "Component uses resource() or httpResource() for data fetching, OR uses toSignal() with an observable", "passed": false, "evidence": "Lines 361-378: Uses manual HttpClient.get().subscribe() with loading/error signal management instead of resource() or toSignal()"},
+    {"text": "Component is standalone (standalone: true or no modules)", "passed": true, "evidence": "Line 31: standalone: true"},
+    {"text": "TypeScript types are used (no 'any')", "passed": true, "evidence": "Interfaces defined with proper types, though 'status: string' is less strict than a union type"}
+  ],
+  "summary": {"passed": 5, "failed": 2, "total": 7, "pass_rate": 0.71}
+}

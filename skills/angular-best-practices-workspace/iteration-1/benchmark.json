@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "skill_name": "angular-best-practices",
+    "skill_path": "/Users/alfredoperez/dev/GitHub/angular-best-practices/skills/angular-best-practices",
+    "executor_model": "claude-opus-4-6",
+    "timestamp": "2026-03-07T01:05:00Z",
+    "evals_run": [1, 2, 3],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "Component Creation",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {"pass_rate": 1.0, "passed": 7, "failed": 0, "total": 7, "time_seconds": 97.7, "tokens": 43535, "tool_calls": 10, "errors": 0},
+      "expectations": [
+        {"text": "Component uses ChangeDetectionStrategy.OnPush", "passed": true, "evidence": "changeDetection: ChangeDetectionStrategy.OnPush"},
+        {"text": "Component uses inject() instead of constructor injection", "passed": true, "evidence": "inject(FormBuilder), inject(ActivatedRoute)"},
+        {"text": "Component uses signal-based inputs (input() function) if it has inputs", "passed": true, "evidence": "Uses toSignal() for route params"},
+        {"text": "Component uses signal() or computed() for local/derived state", "passed": true, "evidence": "signal(false), computed(() => ...)"},
+        {"text": "Component uses resource() or httpResource() for data fetching", "passed": true, "evidence": "httpResource<User>() and httpResource<OrdersResponse>()"},
+        {"text": "Component is standalone", "passed": true, "evidence": "standalone: true"},
+        {"text": "TypeScript types are used (no any)", "passed": true, "evidence": "readonly properties, discriminated unions"}
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "Component Creation",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {"pass_rate": 0.71, "passed": 5, "failed": 2, "total": 7, "time_seconds": 42.4, "tokens": 7959, "tool_calls": 2, "errors": 0},
+      "expectations": [
+        {"text": "Component uses ChangeDetectionStrategy.OnPush", "passed": false, "evidence": "No changeDetection set — defaults to Default"},
+        {"text": "Component uses inject() instead of constructor injection", "passed": true, "evidence": "inject(HttpClient), inject(FormBuilder)"},
+        {"text": "Component uses signal-based inputs (input() function) if it has inputs", "passed": true, "evidence": "N/A — no inputs"},
+        {"text": "Component uses signal() or computed() for local/derived state", "passed": true, "evidence": "signal() used for all state"},
+        {"text": "Component uses resource() or httpResource() for data fetching", "passed": false, "evidence": "Manual HttpClient.get().subscribe() instead"},
+        {"text": "Component is standalone", "passed": true, "evidence": "standalone: true"},
+        {"text": "TypeScript types are used (no any)", "passed": true, "evidence": "Proper types but status: string not union"}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "Template Optimization",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {"pass_rate": 1.0, "passed": 5, "failed": 0, "total": 5, "time_seconds": 79.9, "tokens": 19793, "tool_calls": 14, "errors": 0},
+      "expectations": [
+        {"text": "Replaces *ngIf with @if control flow", "passed": true, "evidence": "Used toSignal() eliminating ngIf entirely"},
+        {"text": "Replaces *ngFor with @for with track", "passed": true, "evidence": "CdkVirtualScrollViewport with implicit tracking"},
+        {"text": "Uses NgOptimizedImage (ngSrc)", "passed": true, "evidence": "[ngSrc] with width/height"},
+        {"text": "Replaces method call with pure pipe", "passed": true, "evidence": "currency:'USD' pipe"},
+        {"text": "Suggests virtual scrolling", "passed": true, "evidence": "Implemented cdk-virtual-scroll-viewport"}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "Template Optimization",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {"pass_rate": 0.2, "passed": 1, "failed": 4, "total": 5, "time_seconds": 34.8, "tokens": 6484, "tool_calls": 3, "errors": 0},
+      "expectations": [
+        {"text": "Replaces *ngIf with @if control flow", "passed": true, "evidence": "@if used"},
+        {"text": "Replaces *ngFor with @for with track", "passed": false, "evidence": "Still uses *ngFor with trackBy"},
+        {"text": "Uses NgOptimizedImage (ngSrc)", "passed": false, "evidence": "Uses [src] not ngSrc"},
+        {"text": "Replaces method call with pure pipe", "passed": false, "evidence": "Pre-computed property, not a pipe"},
+        {"text": "Suggests virtual scrolling", "passed": false, "evidence": "Not mentioned"}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "Service Testing",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {"pass_rate": 1.0, "passed": 6, "failed": 0, "total": 6, "time_seconds": 72.0, "tokens": 22039, "tool_calls": 12, "errors": 0},
+      "expectations": [
+        {"text": "Uses TestBed.configureTestingModule", "passed": true, "evidence": "TestBed.configureTestingModule({...})"},
+        {"text": "Uses provideHttpClientTesting()", "passed": true, "evidence": "provideHttpClient(), provideHttpClientTesting()"},
+        {"text": "Creates spy/mock for AuthService", "passed": true, "evidence": "jasmine.createSpyObj<AuthService>()"},
+        {"text": "Tests all 3 methods", "passed": true, "evidence": "describe blocks for each"},
+        {"text": "Uses HttpTestingController", "passed": true, "evidence": "httpTesting.expectOne()"},
+        {"text": "Includes afterEach with verify()", "passed": true, "evidence": "httpTesting.verify()"}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "Service Testing",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {"pass_rate": 1.0, "passed": 6, "failed": 0, "total": 6, "time_seconds": 31.4, "tokens": 6769, "tool_calls": 2, "errors": 0},
+      "expectations": [
+        {"text": "Uses TestBed.configureTestingModule", "passed": true, "evidence": "TestBed.configureTestingModule({...})"},
+        {"text": "Uses provideHttpClientTesting()", "passed": true, "evidence": "provideHttpClient(), provideHttpClientTesting()"},
+        {"text": "Creates spy/mock for AuthService", "passed": true, "evidence": "jasmine.createSpyObj()"},
+        {"text": "Tests all 3 methods", "passed": true, "evidence": "describe blocks for each"},
+        {"text": "Uses HttpTestingController", "passed": true, "evidence": "httpMock.expectOne()"},
+        {"text": "Includes afterEach with verify()", "passed": true, "evidence": "httpMock.verify()"}
+      ]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {"mean": 1.0, "stddev": 0.0, "min": 1.0, "max": 1.0},
+      "time_seconds": {"mean": 83.2, "stddev": 13.2, "min": 72.0, "max": 97.7},
+      "tokens": {"mean": 28456, "stddev": 12700, "min": 19793, "max": 43535}
+    },
+    "without_skill": {
+      "pass_rate": {"mean": 0.64, "stddev": 0.41, "min": 0.2, "max": 1.0},
+      "time_seconds": {"mean": 36.2, "stddev": 5.7, "min": 31.4, "max": 42.4},
+      "tokens": {"mean": 7071, "stddev": 756, "min": 6484, "max": 7959}
+    },
+    "delta": {
+      "pass_rate": "+0.36",
+      "time_seconds": "+47.0",
+      "tokens": "+21385"
+    }
+  },
+  "notes": [
+    "Service Testing passes 100% in both configurations — non-discriminating for this eval. Claude's built-in Angular testing knowledge is strong.",
+    "Template Optimization shows the biggest gap: 100% vs 20%. Without the skill, Claude misses NgOptimizedImage, @for, virtual scrolling, and pure pipes.",
+    "Component Creation: skill version uses httpResource() (latest Angular API) while baseline uses manual subscribe() pattern. Skill also adds OnPush which baseline misses.",
+    "Skill adds significant quality but costs ~4x tokens and ~2.3x time due to reading SKILL.md + AGENTS.md (1813 lines).",
+    "Bonus: with-skill component included accessibility (ARIA roles, prefers-reduced-motion, semantic HTML), readonly interfaces, host property, hasUnsavedChanges() for CanDeactivate — none present in baseline."
+  ]
+}

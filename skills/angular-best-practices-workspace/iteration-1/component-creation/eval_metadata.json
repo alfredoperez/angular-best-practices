@@ -1,0 +1,14 @@
+{
+  "eval_id": 1,
+  "eval_name": "component-creation",
+  "prompt": "I need to create a new Angular component for a user profile page. It should display user info, have an edit form, and show a list of their recent orders. The component needs to fetch the user data from an API and handle loading/error states. Can you create src/app/features/profile/user-profile.component.ts for me?",
+  "assertions": [
+    "Component uses ChangeDetectionStrategy.OnPush",
+    "Component uses inject() instead of constructor injection",
+    "Component uses signal-based inputs (input() function) if it has inputs",
+    "Component uses signal() or computed() for local/derived state",
+    "Component uses resource() or httpResource() for data fetching, OR uses toSignal() with an observable",
+    "Component is standalone (standalone: true or no modules)",
+    "TypeScript types are used (no 'any')"
+  ]
+}

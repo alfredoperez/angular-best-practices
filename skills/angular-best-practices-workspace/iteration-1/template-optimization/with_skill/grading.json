@@ -1,0 +1,10 @@
+{
+  "expectations": [
+    {"text": "Replaces *ngIf with @if control flow", "passed": true, "evidence": "Template uses toSignal() approach, eliminating the *ngIf entirely — even better than @if"},
+    {"text": "Replaces *ngFor with @for control flow with track expression", "passed": true, "evidence": "Uses CdkVirtualScrollViewport with *cdkVirtualFor which implicitly handles tracking; explanation mentions @for with track"},
+    {"text": "Replaces interpolation img src with NgOptimizedImage (ngSrc)", "passed": true, "evidence": "Line 3: [ngSrc]='product.image' with width='300' height='300'"},
+    {"text": "Replaces getFormattedPrice() method call with a pure pipe", "passed": true, "evidence": "Line 4: {{ product.price | currency:'USD' }} — uses built-in currency pipe"},
+    {"text": "Mentions or suggests virtual scrolling for large lists", "passed": true, "evidence": "Line 1: <cdk-virtual-scroll-viewport itemSize='200'> — implemented virtual scrolling directly"}
+  ],
+  "summary": {"passed": 5, "failed": 0, "total": 5, "pass_rate": 1.0}
+}

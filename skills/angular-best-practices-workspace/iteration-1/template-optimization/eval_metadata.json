@@ -1,0 +1,12 @@
+{
+  "eval_id": 2,
+  "eval_name": "template-optimization",
+  "prompt": "I have this Angular template that's performing poorly. It has a big list of products with images and filters. Can you review and optimize this template?\n\n```html\n<div *ngIf=\"products$ | async as products\">\n  <div *ngFor=\"let product of products\">\n    <img src=\"{{product.image}}\" />\n    <p>{{getFormattedPrice(product)}}</p>\n    <p>{{product.name | uppercase}}</p>\n  </div>\n</div>\n```\n\nThis is in src/app/features/catalog/product-list.component.html",
+  "assertions": [
+    "Replaces *ngIf with @if control flow",
+    "Replaces *ngFor with @for control flow with track expression",
+    "Replaces interpolation img src with NgOptimizedImage (ngSrc)",
+    "Replaces getFormattedPrice() method call with a pure pipe",
+    "Mentions or suggests virtual scrolling for large lists"
+  ]
+}

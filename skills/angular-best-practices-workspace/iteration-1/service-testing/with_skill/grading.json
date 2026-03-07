@@ -1,0 +1,11 @@
+{
+  "expectations": [
+    {"text": "Uses TestBed.configureTestingModule for setup", "passed": true, "evidence": "Line 28: TestBed.configureTestingModule({...})"},
+    {"text": "Uses provideHttpClientTesting() or HttpClientTestingModule", "passed": true, "evidence": "Lines 30-31: provideHttpClient(), provideHttpClientTesting()"},
+    {"text": "Creates a spy/mock for AuthService (jasmine.createSpyObj or jest.fn or similar)", "passed": true, "evidence": "Line 25: jasmine.createSpyObj<AuthService>('AuthService', ['getAuthToken'])"},
+    {"text": "Tests at least getOrders, createOrder, and cancelOrder methods", "passed": true, "evidence": "Lines 47, 86, 117: describe blocks for getOrders, createOrder, cancelOrder"},
+    {"text": "Uses HttpTestingController to verify HTTP requests", "passed": true, "evidence": "Lines 59, 96, 125: httpTesting.expectOne() calls throughout"},
+    {"text": "Includes afterEach with httpMock.verify() to check no outstanding requests", "passed": true, "evidence": "Lines 42-45: afterEach(() => { httpTesting.verify(); })"}
+  ],
+  "summary": {"passed": 6, "failed": 0, "total": 6, "pass_rate": 1.0}
+}

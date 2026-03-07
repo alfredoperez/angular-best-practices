@@ -1,0 +1,9 @@
+{
+  "name": "angular-best-practices",
+  "version": "1.2.0",
+  "description": "Modern Angular best practices — 112 rules for Signals, RxJS, performance, SSR, testing, and architecture.",
+  "author": { "name": "alfredoperez" },
+  "repository": "https://github.com/alfredoperez/angular-best-practices",
+  "license": "MIT",
+  "keywords": ["angular", "typescript", "signals", "performance"]
+}

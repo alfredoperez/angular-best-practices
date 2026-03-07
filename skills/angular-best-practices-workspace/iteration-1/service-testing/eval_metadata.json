@@ -1,0 +1,13 @@
+{
+  "eval_id": 3,
+  "eval_name": "service-testing",
+  "prompt": "I need to write unit tests for my Angular OrderService that uses HttpClient and returns observables. The service has methods like getOrders(), createOrder(order), and cancelOrder(id). It also uses an AuthService for getting the auth token. Can you create the spec file at src/app/core/services/order.service.spec.ts?",
+  "assertions": [
+    "Uses TestBed.configureTestingModule for setup",
+    "Uses provideHttpClientTesting() or HttpClientTestingModule",
+    "Creates a spy/mock for AuthService (jasmine.createSpyObj or jest.fn or similar)",
+    "Tests at least getOrders, createOrder, and cancelOrder methods",
+    "Uses HttpTestingController to verify HTTP requests",
+    "Includes afterEach with httpMock.verify() to check no outstanding requests"
+  ]
+}

@@ -1,0 +1,9 @@
+@if (products$ | async; as products) {
+  <cdk-virtual-scroll-viewport itemSize="80" class="product-list-viewport">
+    <div *cdkVirtualFor="let product of products; trackBy: trackByProductId">
+      <img [src]="product.image" [alt]="product.name" loading="lazy" />
+      <p>{{ product.formattedPrice }}</p>
+      <p>{{ product.name | uppercase }}</p>
+    </div>
+  </cdk-virtual-scroll-viewport>
+}

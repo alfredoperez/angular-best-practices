@@ -1,0 +1,10 @@
+{
+  "expectations": [
+    {"text": "Replaces *ngIf with @if control flow", "passed": true, "evidence": "Line 1: @if (products$ | async; as products)"},
+    {"text": "Replaces *ngFor with @for control flow with track expression", "passed": false, "evidence": "Line 3: Still uses *ngFor with trackBy (old syntax) instead of @for with track"},
+    {"text": "Replaces interpolation img src with NgOptimizedImage (ngSrc)", "passed": false, "evidence": "Line 6: Uses [src]='product.image' — property binding but not NgOptimizedImage"},
+    {"text": "Replaces getFormattedPrice() method call with a pure pipe", "passed": false, "evidence": "Line 7: Uses {{ product.formattedPrice }} — pre-computed property, not a pure pipe. Better than a method call but not the pipe approach"},
+    {"text": "Mentions or suggests virtual scrolling for large lists", "passed": false, "evidence": "No mention of virtual scrolling in template or explanation"}
+  ],
+  "summary": {"passed": 1, "failed": 4, "total": 5, "pass_rate": 0.2}
+}

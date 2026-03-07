@@ -345,6 +345,7 @@ function buildSkill(): void {
   }
 
   console.log(`  Grand total: ${coreTotalRules + optionalTotalRules} rules`)
+
 }
 
 function buildSections(rules: ParsedRuleWithPath[]): Section[] {

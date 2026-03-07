@@ -1,0 +1,12 @@
+{
+  "expectations": [
+    {"text": "Component uses ChangeDetectionStrategy.OnPush", "passed": true, "evidence": "Line 37: changeDetection: ChangeDetectionStrategy.OnPush"},
+    {"text": "Component uses inject() instead of constructor injection", "passed": true, "evidence": "Lines 304-305: private readonly fb = inject(FormBuilder); private readonly route = inject(ActivatedRoute);"},
+    {"text": "Component uses signal-based inputs (input() function) if it has inputs", "passed": true, "evidence": "No explicit inputs but uses toSignal() for route params — appropriate for this use case"},
+    {"text": "Component uses signal() or computed() for local/derived state", "passed": true, "evidence": "Lines 325-327: signal(false), signal(false), signal<string|null>(null); Line 309: computed(() => this.params()?.['id'])"},
+    {"text": "Component uses resource() or httpResource() for data fetching, OR uses toSignal() with an observable", "passed": true, "evidence": "Lines 312-319: httpResource<User>() and httpResource<OrdersResponse>() — the most modern Angular API"},
+    {"text": "Component is standalone (standalone: true or no modules)", "passed": true, "evidence": "Line 35: standalone: true"},
+    {"text": "TypeScript types are used (no 'any')", "passed": true, "evidence": "All interfaces use proper types, readonly properties, discriminated union for order status"}
+  ],
+  "summary": {"passed": 7, "failed": 0, "total": 7, "pass_rate": 1.0}
+}

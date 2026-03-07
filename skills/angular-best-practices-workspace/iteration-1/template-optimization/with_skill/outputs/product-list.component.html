@@ -1,0 +1,9 @@
+<cdk-virtual-scroll-viewport itemSize="200" class="product-list-viewport">
+  @if (products()) {
+    <div *cdkVirtualFor="let product of products(); trackBy: trackByProductId">
+      <img [ngSrc]="product.image" width="300" height="300" [alt]="product.name" loading="lazy" />
+      <p>{{ product.price | formatPrice }}</p>
+      <p>{{ product.name | uppercase }}</p>
+    </div>
+  }
+</cdk-virtual-scroll-viewport>
