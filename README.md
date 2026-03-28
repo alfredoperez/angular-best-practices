@@ -1,5 +1,7 @@
 # Angular Best Practices
 
+> **Archived:** Angular now provides an official skills resource at [github.com/angular/skills](https://github.com/angular/skills). This project is no longer maintained. Use the official resource instead.
+
 Concise, actionable Angular best practices optimized for AI agents and LLMs.
 
 **Web app:** [angular-best-practices-web.vercel.app](https://angular-best-practices-web.vercel.app/)
